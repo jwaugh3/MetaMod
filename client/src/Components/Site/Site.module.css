@@ -1,0 +1,10 @@
+.homeBackground {
+    background-color: #EBE8E0;
+}
+
+.homePageContainer {
+    width: 100%;
+    max-width: 1800px;
+    background-color:#EBE8E0;
+    margin: auto;
+}

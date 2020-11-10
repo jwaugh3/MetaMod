@@ -1,0 +1,39 @@
+.loginContainer {
+    width: 100%;
+    height: 90vh;
+}
+
+.loginArtContainer {
+    width: 100%;
+    margin: auto;
+    height: 70%;
+    position: relative;
+}
+
+.loginArt {
+    position: absolute;
+    left: 49%;
+    transform: translateX(-50%);
+    top: 20px;
+}
+
+.twitchLoginButtonContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0px;
+}
+
+.twitchLoginButton {
+    width: 380px;
+    height: 66px;
+    position: absolute;
+    top: 290px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: auto;
+    display: flex;
+    cursor: pointer;
+}

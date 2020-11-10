@@ -1,0 +1,132 @@
+.myModMsg {
+    margin-right: 14px;
+}
+
+.myModUsername{
+    color: white;
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    margin-right: 10px;
+    text-shadow: 2px 2px 3px #000000;
+}
+
+.modMsgContainer {
+    margin-left: 10px;
+}
+
+.modUsername{
+    color: white;
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    text-align: left;
+    margin-left: 10px;
+    text-shadow: 2px 2px 3px #000000;
+}
+
+.twitchChatUsername {
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    text-align: left;
+    margin-left: 10px;
+    text-shadow: 2px 2px 3px #000000;
+}
+
+.msgText {
+    color: white;
+    margin-bottom: 5px;
+    margin-right: 8px;
+    max-width: 260px;
+    padding: 5px;
+    padding-left: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: inline-block;
+    word-wrap: break-word;
+    text-align: left;
+    box-shadow: 3px 3px 8px rgb(0, 0, 0);
+    margin-right: 0px;
+}
+
+.twitchMsgText {
+    color: white;
+    margin-bottom: 5px;
+    margin-right: 8px;
+    width: 294px;
+    padding: 5px;
+    padding-left: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: inline-block;
+    word-wrap: break-word;
+    text-align: left;
+    box-shadow: 3px 3px 8px black;
+    margin-right: 0px;
+    background-color:rgb(39, 39, 39);
+    border: dashed rgb(153, 153, 153) 1px;
+}
+
+.modMsgText {
+    color: white;
+    margin-bottom: 5px;
+    margin-left: 8px;
+    max-width: 260px;
+    padding: 5px;
+    padding-left: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #ff6e6e;
+    display: inline-block;
+    word-wrap: break-word;
+    text-align: left;
+    box-shadow: 3px 3px 8px black;
+}
+
+.embeddedMsg {
+    background-color: #ff6e6e;
+    padding: 0px 14px 4px 4px;
+    margin: auto;
+    border-radius: 6px;
+    width: 300px;
+    display: inline-block;
+    margin-left: 10px;
+    box-shadow: 3px 3px 8px black;
+}
+
+.serverMsgContainer {
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: .8fr 2fr .8fr;
+}
+
+.horzLine {
+    height: 3px;
+    width: 100%;
+    border-top: solid rgb(199, 198, 198) 1px;
+    margin: auto;
+    margin-top: 12px;
+    user-select: none;
+}
+
+.serverText {
+    color: rgb(199, 198, 198);
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    text-align: left;
+    text-shadow: 2px 2px 3px #000000;
+    text-align: center;
+    user-select: none;
+}

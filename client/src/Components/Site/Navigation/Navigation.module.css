@@ -1,0 +1,92 @@
+.navContainer {
+    width: 100%;
+    height: 10vh;
+    min-height: 100px;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.logoContainer {
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    position: relative;
+}
+
+.logoText {
+    display: inline;
+    position: absolute;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 32%;
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navOptionsContainer {
+    width: 70%;
+    margin: auto;
+    height: 30%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.optionsList {
+    list-style-type: none;
+    text-decoration: none;
+    display: flex;
+    margin: auto;
+    height: 100%;
+}
+
+.optionContainer {
+    margin: auto;
+}
+
+.optionText {
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 24px;
+    margin: auto;
+    cursor: pointer;
+    user-select: none;
+}
+
+.optionText:hover {
+    color: #FF6E6E;
+}
+
+.loginButtonContainer {
+    width: 80%;
+    height: 40%;
+    margin: auto;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.loginButton {
+    margin: auto;
+    padding: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-size: 28px;
+    font-weight: 300;
+    background-color: #FF6E6E;
+    position: relative;
+    color: white;
+    box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.905);
+    cursor: pointer;
+    user-select: none;
+}
+
+.loginButton:hover {
+    background-color: #ff6e6ed2;
+}

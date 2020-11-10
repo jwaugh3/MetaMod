@@ -1,0 +1,62 @@
+.homeBannerContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 30% 50% 10%;
+    height: 90vh;
+}
+
+.callToAction {
+    width: 430px;
+    margin: auto;
+    margin-right: 0%;
+    margin-top: 50%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    user-select: none;
+}
+
+.callToAction h2 {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 40px;
+    margin: auto;
+}
+
+.callToAction p {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 0px;
+}
+
+.callToAction button {
+    width: 220px;
+    height: 45px;
+    margin: auto;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FF6E6E;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.905);
+    cursor: pointer;
+}
+
+.callToAction button:hover {
+    background-color: #ff6e6ed2;
+}
+
+.bannerArtContainer {
+    margin: auto;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.bannerArt {
+    width: 100%;
+    user-select: none;
+}

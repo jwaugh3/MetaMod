@@ -1,0 +1,169 @@
+.mainContainer {
+	height: 98vh;
+    width: 100%;
+    overflow: hidden;
+    max-width: 360px;
+    min-width: 300px;
+    margin: 10px 6px 6px 6px;
+    position: relative;
+    background-color: #2E2E2E;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatContainer{
+    position: relative;
+    margin: auto 6px;
+	border-radius: 8px;
+    background-color: #2E2E2E;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.inputBox::placeholder {
+    color: #B7B7B7;
+}
+
+.chatContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(118, 118, 118);
+    border-radius: 8px;
+}
+
+.headerContainer {
+    margin-left: 10px;
+    margin-right: 22px;
+    height: 31px;
+    border-bottom: 1px solid #5e5e5f;
+    display: grid;
+    grid-template-columns: 1.4fr 2fr;
+}
+
+.chatHeader {
+    margin: 3px;
+    color: white;
+    height: 31px;
+    margin-left: 12px;
+    user-select: none;
+}
+
+.customHeaderContainer {
+    margin-top: 3px;
+    width: 100%;
+    height: 26px;
+}
+
+.customHeader {
+    height: 31px;
+    color: white;
+    display: inline;
+    font-size: 21px;
+    margin: 3px;
+    margin-right: 5px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.chatNameInput {
+    max-width: 130px;
+    border-radius: 4px;
+    border: none;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.editButton {
+    width: 22px;
+    height: 22px;
+    padding: 0px;
+    cursor: pointer;
+    margin: auto;
+    background-color: #2E2E2E;
+    border: none;
+    margin-bottom: 8px;
+    vertical-align: middle;
+}
+
+.editIcon {
+    height: 20px;
+    width: 20px;
+    margin: auto;
+    user-select: none;
+}
+
+.inputContainer {
+    position: relative;
+    margin: 0px;
+	bottom: 10px;
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.inputBox {
+    padding: 0px;
+    width: 98%;
+    height: 30px;
+    margin: 0px;
+    color: white;
+    padding-left: 6px;
+    border: solid 2px #ffffff4f;
+    border-radius: 6px;
+    background-color: #343436;
+    user-select: none;
+}
+
+.buttonContainer {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.settingsButton {
+    position: relative;
+    width: 50px;
+    height: 30px;
+    background-color: #FF6E6E;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
+    cursor: pointer;
+}
+
+.settingsButton:hover {
+    background-color: #ca4848;
+}
+
+.settingsIcon {
+    position: absolute;
+    height: 70%;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 4px;
+    user-select: none;
+}
+
+.resumeButtonContainer {
+    position: absolute;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.resumeButton {
+    cursor: pointer;
+    user-select: none;
+    height: 28px;
+    width: 180px;
+    background-color: #ffffffd7;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+    border: none;
+    border-radius: 6px;
+}

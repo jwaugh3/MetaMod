@@ -1,0 +1,102 @@
+.mainContainer {
+	height: 98vh;
+    width: 100%;
+    overflow: hidden;
+    max-width: 360px;
+    min-width: 300px;
+    margin: 10px 6px 6px 12px;
+    position: relative;
+    background-color: #2E2E2E;
+    border-radius: 8px;
+}
+
+.chatContainer{
+    position: relative;
+    margin: auto 6px;
+	border-radius: 8px;
+    background-color: #2E2E2E;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.inputBox::placeholder {
+    color: #B7B7B7;
+}
+
+.chatContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(118, 118, 118);
+    border-radius: 8px;
+}
+
+.headerContainer {
+    margin-left: 10px;
+    margin-right: 22px;
+    border-bottom: 1px solid #5e5e5f;
+    user-select: none;
+    display: grid;
+    grid-template-columns: 1.3fr 2fr;
+}
+
+.chatHeader {
+    margin: 3px;
+    color: white;
+    height: 3%;
+    margin-left: 12px;
+}
+
+.roomUserContainer {
+    width: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.roomUserImageContainer {
+    width: 14px;
+    height: 100%;
+    margin: auto;
+    display: inline-block;
+    position: relative;
+}
+
+.roomUserImage {
+    height: 21px;
+    width: 21px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+}
+
+.inputContainer {
+    position: absolute;
+    margin: 0px;
+	bottom: 15px;
+    width: 94%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    background-color: #18181b;
+}
+
+.inputBox {
+    padding: 0px;
+    width: 98%;
+    height: 30px;
+    margin: 0px;
+    color: white;
+    padding-left: 6px;
+    border: solid 2px #ffffff4f;
+    border-radius: 6px;
+    background-color: #343436;
+    user-select: none;
+}
+
+

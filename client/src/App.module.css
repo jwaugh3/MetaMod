@@ -1,0 +1,14 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	overflow-y: hidden;
+}
+
+@font-face {
+	font-family: 'Swis721-reg';
+	src: url('./resources/fonts/swis721_LtEx_Bt.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');

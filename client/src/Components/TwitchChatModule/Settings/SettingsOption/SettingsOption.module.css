@@ -1,0 +1,75 @@
+.settingsText {
+    margin: auto;
+    user-select: none;
+}
+
+.toggleBtn {
+    height: 26px;
+    width: 40px;
+    margin: auto;
+}
+
+/* settings button */
+.tglflip {
+    display: none;
+}
+
+.tglflip + .tglbtn {
+    cursor: pointer;
+	width: 50px;
+	padding: 2px;
+	transition: all 0.2s ease;
+	font-family: sans-serif;
+    perspective: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.tglflip + .tglbtn:after, .tglflip + .tglbtn:before {
+	display: inline-block;
+	transition: all 0.4s ease;
+	width: 40px;
+	text-align: center;
+	position: absolute;
+	line-height: 2em;
+	font-size: 13px;
+	color: black;
+	font-weight: bold;
+	padding: 1px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+	border-radius: 4px;
+}
+
+.tglflip + .tglbtn:after {
+	content: attr(data-tg-on);
+    background: #42e86b;
+    color: black;
+    font-weight: bold;
+	transform: rotateY(-180deg);
+}
+
+.tglflip + .tglbtn:before {
+	background: #ff6e6e;
+	content: attr(data-tg-off);
+}
+
+.tglflip + .tglbtn:active:before {
+	transform: rotateY(-20deg);
+}
+
+.tglflip:checked + .tglbtn:before {
+	transform: rotateY(180deg);
+}
+
+.tglflip:checked + .tglbtn:after {
+	transform: rotateY(0);
+	left: 0;
+}
+
+.tglflip:checked + .tglbtn:active:after {
+	transform: rotateY(20deg);
+}
