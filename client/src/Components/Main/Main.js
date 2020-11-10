@@ -25,8 +25,7 @@ class Main extends Component {
     modMsg: '',
     modMsgs: [],
     twitchMessages: [],
-    moduleSettings: [ { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false } ],
-    // pausedChat: [],
+    moduleSettings: [ { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false, directChat: true, hideEmotes: false, modMsgs: true } ],
     modList: [],
     currentChannel: '',
     channelAccess: [],
@@ -61,6 +60,10 @@ class Main extends Component {
       this.setState({channelEmotes: emoteData[0], channelEmoteCodes: emoteData[1], channelEmoteIDByName: emoteData[2]})
     })
 
+    await apiCall.getMods(this.state.currentChannel).then((data)=>{
+      this.setState({modList: data.mods})
+    })
+
     socket.on('roomUsers', (roomUsers)=>{
       console.log(roomUsers)
       let newUsers = roomUsers.users
@@ -81,7 +84,7 @@ class Main extends Component {
     if(this.state.twitchChatCount <= 3){
       this.setState({
         twitchChatCount: this.state.twitchChatCount +1, 
-        moduleSettings: [...this.state.moduleSettings,  { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false } ]})
+        moduleSettings: [...this.state.moduleSettings,  { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false, directChat: true, hideEmotes: false, modMsgs: true } ]})
     }
   }
 
@@ -129,6 +132,24 @@ class Main extends Component {
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].subscribersOnly = !this.state.moduleSettings[moduleNum].subscribersOnly
       console.log(newObject)
+      this.setState({moduleSettings: newObject})
+    }
+    else if(setting === '@' + this.state.currentChannel){
+      let newObject = [...this.state.moduleSettings]
+      newObject[moduleNum].directChat = !this.state.moduleSettings[moduleNum].directChat
+      console.log(newObject)
+      this.setState({moduleSettings: newObject})
+    }
+    else if(setting === 'Hide Emotes'){
+      let newObject = [...this.state.moduleSettings]
+      newObject[moduleNum].hideEmotes = !this.state.moduleSettings[moduleNum].hideEmotes
+      console.log(newObject[moduleNum].hideEmotes)
+      this.setState({moduleSettings: newObject})
+    }
+    else if(setting === 'modMsgs'){
+      let newObject = [...this.state.moduleSettings]
+      newObject[moduleNum].modMsgs = !this.state.moduleSettings[moduleNum].modMsgs
+      console.log(newObject[moduleNum].modMsgs)
       this.setState({moduleSettings: newObject})
     }
   }
@@ -191,8 +212,7 @@ class Main extends Component {
   }
 
   clicked = () => {
-    console.log(this.state.twitchMessages)
-    console.log(this.state.modMsgs)
+    console.log(this.state.modList)
   }
 
   render(){
@@ -214,12 +234,14 @@ class Main extends Component {
           chatNameHandler={this.chatNameHandler}
           editNameToggler={this.editNameToggler}
           pauseStateChatModule={this.pauseStateChatModule}
+          currentChannel={this.state.currentChannel}
         >
         <TwitchChatContent 
           twitchMessages={this.state.twitchMessages}
           draggable="true" 
           moduleSettings={this.state.moduleSettings[i]} 
           moduleNum={i}
+          currentChannel={this.state.currentChannel}
           emotes={this.state.channelEmotes}
           emoteCodes={this.state.channelEmoteCodes}
           emoteIDByName={this.state.channelEmoteIDByName}

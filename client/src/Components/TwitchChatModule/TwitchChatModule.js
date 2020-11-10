@@ -98,6 +98,7 @@ class TwitchChatModule extends Component {
                     moduleNum={this.props.moduleNum} 
                     updateSettings={this.props.updateSettings} 
                     removeChatModule={this.props.removeChatModule}
+                    channel={this.props.currentChannel}
                 />
             </div>
         );

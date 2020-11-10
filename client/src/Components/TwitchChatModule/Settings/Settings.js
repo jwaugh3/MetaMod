@@ -15,8 +15,11 @@ class Settings extends Component {
                 <div className={styles.settingsContainer} draggable='false'>
                     <h3 className={styles.settingsHeader}>Settings</h3>
                     <div/>
-                    <SettingsOption settingsName={'Hide Commands'} selected={this.props.moduleSettings.hideCommands} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
-                    <SettingsOption settingsName={'Subscribers Only'} selected={this.props.moduleSettings.subscribersOnly} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
+                    <SettingsOption settingsLabel={'Hide Commands'} settingsName={'Hide Commands'} selected={this.props.moduleSettings.hideCommands} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
+                    <SettingsOption settingsLabel={'Subscribers Only'} settingsName={'Subscribers Only'} selected={this.props.moduleSettings.subscribersOnly} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
+                    <SettingsOption settingsLabel={'Mod Messages'} settingsName={'modMsgs'} selected={this.props.moduleSettings.modMsgs} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
+                    <SettingsOption settingsLabel={'Show @' + this.props.channel} settingsName={'@' + this.props.channel} selected={this.props.moduleSettings.directChat} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
+                    <SettingsOption settingsLabel={'Hide Emotes'} settingsName={'Hide Emotes'} selected={this.props.moduleSettings.hideEmotes} updateSettings={this.props.updateSettings} moduleNum={this.props.moduleNum}/>
                     <div/>
                     <div className={styles.removeChatContainer}>
                         <button className={styles.removeChatButton} onClick={()=>this.props.removeChatModule(this.props.moduleNum)}><p className={styles.removeChatText}>Remove Chat Module</p></button>

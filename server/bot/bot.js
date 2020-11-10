@@ -23,6 +23,7 @@ const onMessageHandler = async (target, user, msg, self) => {
         displayName: user['display-name'], 
         displayColor: user.color, msg: msg, 
         subscriber: user.subscriber,
+        mod: user.mod,
         emotes: user.emotes
     })
 }
