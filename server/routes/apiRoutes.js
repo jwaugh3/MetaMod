@@ -68,6 +68,6 @@ router.get('/getFfzEmotes/:channel', (req, res) => {
             res.json(emotes)
         }
     })
-})
+}) 
 
 module.exports = router;  

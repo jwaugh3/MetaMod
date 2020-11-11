@@ -13,56 +13,51 @@ class ModChatContent extends Component {
             
             if(msgObject.sentBy === this.props.username && msgObject.username === this.props.username){
                 return( //message sent by the user themselves - done
-                    <div className={styles.myModMsg}
+                    <div className={styles.modMsg}
                     key={this.props.modMsgs.indexOf(msgObject)} 
-                    style={{textAlign: 'right'}}
                     draggable="false"
                     >
-                    <p className={styles.myModUsername}>{msgObject.username}</p>
-                    <div className={styles.msgText}  style={{backgroundColor: 'rgb(39, 39, 39)'}}>
-                        {msgObject.modMsg}
+                        <div className={styles.userContainer}>
+                            <img className={styles.msgImg} src={this.props.profileImage} alt="Mod"/>
+                            <p className={styles.modUsername}>{msgObject.username}</p>
+                        </div>
+                        <div className={styles.msgText}  style={{backgroundColor: 'rgb(39, 39, 39)'}}>
+                            {msgObject.modMsg}
+                        </div>
                     </div>
-                </div>
                 )
             }
             if(msgObject.sentBy !== this.props.username && msgObject.userType === 'mod'){
                 return( //message sent by another mod - done
-                    <div className={styles.modMsgContainer}
-                        key={this.props.modMsgs.indexOf(msgObject)} 
-                        >
-                        <p className={styles.modUsername}>{msgObject.username}</p>
-                        <div className={styles.modMsgText}>
-                          {msgObject.modMsg}
+                    <div className={styles.modMsg}
+                    key={this.props.modMsgs.indexOf(msgObject)} 
+                    draggable="false"
+                    >
+                        <div className={styles.userContainer}>
+                            <img className={styles.msgImg} src={msgObject.profileImage} alt="Mod"/>
+                            <p className={styles.modUsername}>{msgObject.username}</p>
+                        </div>
+                        <div className={styles.msgText}  style={{backgroundColor: 'rgb(39, 39, 39)'}}>
+                            {msgObject.modMsg}
                         </div>
                     </div>
                 )
             }
-            else if(msgObject.sentBy === this.props.username && msgObject.username !== this.props.username){
+            else if(msgObject.userType === 'twitchUser'){
 
                 let insertDiv = <div dangerouslySetInnerHTML={{__html: msgObject.modMsg}}></div>
-
 
                 return( //message moved from twitch chat by user - done
-                    <div className={styles.mainContainer} key={this.props.modMsgs.indexOf(msgObject)}>
-                        <p className={styles.myModUsername} style={{marginRight: '18px', textAlign: 'right', color: 'white'}}>{this.props.username}</p>
-                        <div className={styles.embeddedMsg}>
-                            <p className={styles.twitchChatUsername}>{msgObject.username}</p>
-                            <div className={styles.twitchMsgText}>
-                                {insertDiv}
-                            </div>
+                    <div className={styles.modMsg}
+                    key={this.props.modMsgs.indexOf(msgObject)} 
+                    draggable="false"
+                    >
+                        <div className={styles.userContainer}>
+                            <img className={styles.msgImg} src={msgObject.profileImage} alt="Mod"/>
+                            <p className={styles.modUsername}>{msgObject.sentBy}</p>
                         </div>
-                    </div>
-                )
-            }
-            else if(msgObject.sentBy !== this.props.username && msgObject.userType === 'twitchUser'){
-
-                let insertDiv = <div dangerouslySetInnerHTML={{__html: msgObject.modMsg}}></div>
-
-                return( //message moved from twitch chat by other mod
-                    <div className={styles.mainContainer} key={this.props.modMsgs.indexOf(msgObject)}>
-                        <p className={styles.myModUsername} style={{marginLeft: '18px', textAlign: 'left', color: 'white'}}>{msgObject.sentBy}</p>
                         <div className={styles.embeddedMsg}>
-                            <p className={styles.twitchChatUsername}>{msgObject.username}</p>
+                            
                             <div className={styles.twitchMsgText}>
                                 {insertDiv}
                             </div>
@@ -71,7 +66,7 @@ class ModChatContent extends Component {
                 )
             }
             else if(msgObject.sentBy === 'server'){
-                return( //message moved from twitch chat by other mod
+                return( //join/leave messages
                     <div className={styles.serverMsgContainer}
                         key={this.props.modMsgs.indexOf(msgObject)} 
                     >

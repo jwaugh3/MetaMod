@@ -150,7 +150,7 @@ router.get('/redirected', (req, res) => {
 							//check if channel access exists for user and mods
 							client.mods(userObject[0].login)
 								.then((data)=>{
-									console.log(data)
+									console.log('data', data)
 									//create login users channel access
 									ChannelAccess.findOne({login_username: userObject[0].login}).then((existingLogin)=>{
 										if(!existingLogin){
@@ -160,7 +160,7 @@ router.get('/redirected', (req, res) => {
 											})
 											.save()
 											.then((user)=>{
-												console.log(user)
+												console.log('user', user)
 											})
 										} else {
 											let newAccess = data

@@ -12,7 +12,7 @@ const getBttvChannelEmotes = (channelID, channelName) => {
     request(options, (err, result, body)=>{
         let emoteData = JSON.parse(body)
         if(emoteData.message){
-            console.log(emoteData.message)
+            console.log('msg', emoteData.message)
         } else {
             let channelEmotes = []
 

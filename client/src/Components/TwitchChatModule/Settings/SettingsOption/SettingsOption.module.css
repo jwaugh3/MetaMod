@@ -1,6 +1,8 @@
 .settingsText {
     margin: auto;
-    user-select: none;
+	user-select: none;
+	font-family: 'Roboto';
+	font-weight: 400;
 }
 
 .toggleBtn {

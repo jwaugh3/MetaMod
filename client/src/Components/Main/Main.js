@@ -25,7 +25,7 @@ class Main extends Component {
     modMsg: '',
     modMsgs: [],
     twitchMessages: [],
-    moduleSettings: [ { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false, directChat: true, hideEmotes: false, modMsgs: true } ],
+    moduleSettings: [ { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, commands: true, nonsubscribers: true, subscribers: true, directChat: true, emotes: true, modMsgs: true } ],
     modList: [],
     currentChannel: '',
     channelAccess: [],
@@ -74,7 +74,7 @@ class Main extends Component {
 
 
     socket.on('newModMsg', (modMsg)=>{
-        console.log('here', modMsg)
+      console.log(modMsg)
         this.setState({modMsgs: [...this.state.modMsgs, modMsg]})
     })
 
@@ -84,7 +84,7 @@ class Main extends Component {
     if(this.state.twitchChatCount <= 3){
       this.setState({
         twitchChatCount: this.state.twitchChatCount +1, 
-        moduleSettings: [...this.state.moduleSettings,  { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, hideCommands: false, subscribersOnly: false, directChat: true, hideEmotes: false, modMsgs: true } ]})
+        moduleSettings: [...this.state.moduleSettings,  { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, commands: true, nonsubscribers: true, subscribers: true, directChat: true, emotes: true, modMsgs: true } ]})
     }
   }
 
@@ -112,25 +112,32 @@ class Main extends Component {
           time: 'three', 
           userType: 'mod', 
           modMsg: this.state.modMsg, 
-          sentBy: this.state.username 
+          sentBy: this.state.username,
+          profileImage: this.state.profileImage
         })
         this.setState({modMsg: ''})
     }
   }
 
   transferTwitchMsg = (msg) =>{
-    socket.emit('modMsg', { username: '', time: '', userType: 'twitchUser', modMsg: msg, sentBy: this.state.username })
+    socket.emit('modMsg', { username: '', time: '', userType: 'twitchUser', modMsg: msg, sentBy: this.state.username, profileImage: this.state.profileImage })
   }
 
   updateSettings = (setting, moduleNum) => {
-    if(setting === 'Hide Commands'){
+    if(setting === 'Commands'){
       let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].hideCommands = !this.state.moduleSettings[moduleNum].hideCommands
+      newObject[moduleNum].commands = !this.state.moduleSettings[moduleNum].commands
       this.setState({moduleSettings: newObject})
     }
-    else if(setting === 'Subscribers Only'){
+    else if(setting === 'Subscriber Messages'){
       let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].subscribersOnly = !this.state.moduleSettings[moduleNum].subscribersOnly
+      newObject[moduleNum].subscribers = !this.state.moduleSettings[moduleNum].subscribers
+      console.log(newObject)
+      this.setState({moduleSettings: newObject})
+    }
+    else if(setting === 'NonSubscriber Messages'){
+      let newObject = [...this.state.moduleSettings]
+      newObject[moduleNum].nonsubscribers = !this.state.moduleSettings[moduleNum].nonsubscribers
       console.log(newObject)
       this.setState({moduleSettings: newObject})
     }
@@ -140,10 +147,10 @@ class Main extends Component {
       console.log(newObject)
       this.setState({moduleSettings: newObject})
     }
-    else if(setting === 'Hide Emotes'){
+    else if(setting === 'Emotes'){
       let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].hideEmotes = !this.state.moduleSettings[moduleNum].hideEmotes
-      console.log(newObject[moduleNum].hideEmotes)
+      newObject[moduleNum].emotes = !this.state.moduleSettings[moduleNum].emotes
+      console.log(newObject[moduleNum].emotes)
       this.setState({moduleSettings: newObject})
     }
     else if(setting === 'modMsgs'){
@@ -290,6 +297,7 @@ class Main extends Component {
             <ModChatContent 
             modMsgs={this.state.modMsgs} 
             username={this.state.username}
+            profileImage={this.state.profileImage}
             currentChannel={this.state.currentChannel}
             id="modCard"
             draggable="true"

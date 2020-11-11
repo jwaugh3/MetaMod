@@ -10,12 +10,13 @@ const getFfzChannelEmotes = (channelID, channelName) => {
     };
 
     request(options, (err, result, body)=>{
-        let emoteData = JSON.parse(body)
-        let set = emoteData.room.set
-
-        if(emoteData.message){
-            console.log(emoteData.message)
+        console.log(JSON.parse(body).error)
+        if(JSON.parse(body).error){
+            console.log(body.message)
         } else {
+            console.log(body)
+            let emoteData = JSON.parse(body)
+            let set = emoteData.room.set
             let channelEmotes = []
 
             emoteData.sets[set].emoticons.forEach((emoteObject)=>{
