@@ -37,7 +37,7 @@ class Main extends Component {
   }
   
   componentDidMount = async () => {
-
+    
     //Get query from url
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed['?access_token'];
@@ -77,7 +77,6 @@ class Main extends Component {
       console.log(modMsg)
         this.setState({modMsgs: [...this.state.modMsgs, modMsg]})
     })
-
   }
 
   addTwitchChatModule = () => {
@@ -104,8 +103,9 @@ class Main extends Component {
   }
 
   onMessageSubmit = (event) => {
+    event.preventDefault();
+    
     if(this.state.modMsg.length > 0){
-        event.preventDefault();
         document.getElementById('modTextInput').reset()
         socket.emit('modMsg', {
           username: this.state.username, 
@@ -269,7 +269,7 @@ class Main extends Component {
       <div className={styles.application}>
         <div className={styles.navbar}>
           <div className={styles.buttonContainer}>
-            <div onClick={this.clicked} className={styles.navButton}/>
+            {/* <div onClick={this.clicked} className={styles.navButton}/> */}
             <div className={styles.buttonSlot}>
               <button onClick={this.toggleModChatModule} className={styles.navButton} style={this.state.modChatEnabled ? {opacity: '100%'} : {opacity: '50%'}}>
                 <img className={styles.modIcon} src={modIcon} alt="Mod Icon"/>
@@ -283,6 +283,7 @@ class Main extends Component {
             {channelList}
           </div>
         </div>
+        
         <div className={styles.chatModules}>
           <ModChatModule 
             className={styles.modModule} 

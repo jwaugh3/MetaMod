@@ -1,21 +1,20 @@
 .msgText {
 	color: white;
-    margin: 2px;
-    font-size: 14px;
-    user-select: none;
-    cursor: pointer;
+	margin: 2px;
+	font-size: 14px;
+	user-select: none;
+	cursor: pointer;
 }
 
 .msgText:hover {
-    background-color: rgb(46, 46, 46);
-    border-radius: 6px;
+	background-color: rgb(46, 46, 46);
+	border-radius: 6px;
 }
 
 .emote {
     height: 28px;
-    width: 28px;
-    margin: auto;
-    vertical-align: middle;
-    margin-bottom: 5px;
-    user-select: none;
+	margin: auto;
+	vertical-align: middle;
+	margin-bottom: 5px;
+	user-select: none;
 }

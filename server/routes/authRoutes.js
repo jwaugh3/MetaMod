@@ -168,7 +168,7 @@ router.get('/redirected', (req, res) => {
 											ChannelAccess.findOneAndUpdate({login_username: userObject[0].login}, {channel_access: newAccess}, {new: true, useFindAndModify: false})
 										}
 									})
-									
+									 
 									//create or update all mods channel access
 									data.forEach(async (mod)=>{
 										console.log(mod)
@@ -194,7 +194,7 @@ router.get('/redirected', (req, res) => {
 											}
 										})
 									})
-								})
+								})  
 								.catch((err)=>{
 									console.log(err)
 								})

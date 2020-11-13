@@ -7,6 +7,15 @@ import styles from './ModChatModule.module.css';
 
 class ModChatModule extends Component {
 
+    scrollToBottom = () => { 
+        let lastModCard = document.getElementById('lastModCard'+this.props.moduleNum)
+        lastModCard.scrollIntoView()
+    }
+
+    componentDidUpdate(){
+        this.scrollToBottom()
+    }
+
     drop = (event) =>{
         event.preventDefault();
         const data = event.dataTransfer.getData('transfer')

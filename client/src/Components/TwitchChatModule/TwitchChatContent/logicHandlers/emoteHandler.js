@@ -1,62 +1,78 @@
+import { split } from 'lodash';
 import React from 'react';
 import styles from '../TwitchChatContent.module.css';
 
 const emoteHandler = (msgObject, props) => {
     var emoteID = props.emoteIDByName
-    var splitCode = [msgObject.msg]
+    var splitCode = msgObject.msg
     var loopCount = 0
+    var stringExtend = 0
+    let emoteArray = []
+    let emoteTag
 
-    if(msgObject.emotes !== null){
-        for(const key in msgObject.emotes){
-            // splitCode.forEach((part)=>{
-            for(let x = 0; x < splitCode.length; x++){
-                let part = splitCode[x]
-                let index = splitCode.indexOf(part)
-
-                // msgObject.emotes[key].forEach((indexArray)=>{
-                for(let y=0; y < msgObject.emotes[key]; y++){
-                    let indexArray = msgObject.emotes[key][y]
-                    console.log(indexArray)
-
-                    let stringIndex = indexArray.split('-')
-                    
-                    console.log('part', part)
-                    if(typeof part === 'string'){
-                        let emoteString = part.substring(stringIndex[0], stringIndex[1]+1)
-                        console.log('emoteString', emoteString)
-                        part = part.split(emoteString)
-
-                        if(part.length > 1){
-                            let i = 1
-                            let emoteTag
-                
-                            while (i < part.length) {
-                                emoteTag = <img src={`https://static-cdn.jtvnw.net/emoticons/v1/${key}/1.0`} key={key+''+loopCount} alt="Twitch Emote"/>
-                                console.log(key)
-
-                                part.splice(i, 0, emoteTag);
-                                i += 2;
-                                // loopCount++
-                            }
-                        }
-                    } else {
-                        part = [part]
-                    }
-                }
-                // })
-            
-                splitCode.splice(index, 1, ...part)
-            }
-            // })
-        }
+    for(const key in msgObject.emotes){
+        msgObject.emotes[key].forEach((location)=>{
+            emoteArray.push([key, parseInt(location.split('-')[0]), location])
+        })
     }
+    emoteArray.sort((a, b)=> {return (a[1] < b[1]) ? -1 : 1})
+    console.log(emoteArray)
 
+    if(typeof msgObject.msg === 'string'){
+
+        emoteArray.forEach((emoteData)=>{
+
+            let part = splitCode
+
+            let stringIndex = emoteData[2].split('-')
+
+            part = part.substr(0, parseInt(stringIndex[0])+stringExtend) + '#' + emoteData[0] + part.substr(parseInt(stringIndex[1])+1+stringExtend)
+
+            stringExtend = stringExtend + parseInt(emoteData[0].length+1) - (parseInt(stringIndex[1])-parseInt(stringIndex[0]) +1)
+
+
+            splitCode = part
+        })
+
+        splitCode = [splitCode]  
+
+        emoteArray.forEach((emoteData)=>{
+            let newKey = emoteData[0] + emoteData[1]
+            console.log(newKey)
+            splitCode.forEach((part)=>{
+                let index = splitCode.indexOf(part)
+                if(typeof part === 'string'){
+                    part = part.split('#' + emoteData[0])
+                    
+                    if(part.length > 1){
+
+                        emoteTag = <img src={`https://static-cdn.jtvnw.net/emoticons/v1/${emoteData[0]}/1.0`} key={newKey} className={styles.emote} draggable="false" alt="Twitch Emote"/>
+
+                        part.splice(1, 0, emoteTag)
+                    }
+
+                } else {
+                    part = [part]
+                }
+                
+                splitCode.splice(index, 1, ...part)
+            })
+        })
+        
+        console.log('splitCode', splitCode)            
+    }
+console.log(msgObject.msg)
 
     if((new RegExp(props.emoteCodes.join('|'), 'gi')).test(msgObject.msg)){
+        
+        if(!Array.isArray(splitCode)){
+            splitCode = [splitCode]  
+        }
+
         props.emotes.forEach(emote => {
             splitCode.forEach((part)=>{
                 
-                // console.log(loopCount)
+                
                 let index = splitCode.indexOf(part)
 
                 if(typeof part === 'string'){
@@ -65,7 +81,6 @@ const emoteHandler = (msgObject, props) => {
                     
                     if(part.length > 1){
                         
-                        let emoteTag
                         let i = 1
             
                         while (i < part.length) {

@@ -84,6 +84,7 @@ class ModChatContent extends Component {
         return ( 
             <div>
                 {chatContent}
+                <div id={"lastModCard"+this.props.moduleNum}></div>
             </div>
         );
     }

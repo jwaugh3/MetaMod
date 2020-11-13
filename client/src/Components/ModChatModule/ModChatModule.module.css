@@ -6,15 +6,16 @@
     min-width: 300px;
     margin: 10px 6px 6px 12px;
     position: relative;
-    background-color: #2E2E2E;
+    background-color:#272727;
     border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
 }
 
 .chatContainer{
     position: relative;
     margin: auto 6px;
 	border-radius: 8px;
-    background-color: #2E2E2E;
+    background-color:#272727;
     height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -35,8 +36,8 @@
 
 .headerContainer {
     margin-left: 10px;
-    margin-right: 22px;
-    border-bottom: 1px solid #5e5e5f;
+    margin-right: 10px;
+    border-bottom: 1px solid rgb(199, 198, 198);
     user-select: none;
     display: grid;
     grid-template-columns: 1.3fr 2fr;
