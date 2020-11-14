@@ -1,4 +1,3 @@
-import { split } from 'lodash';
 import React from 'react';
 import styles from '../TwitchChatContent.module.css';
 
@@ -10,13 +9,13 @@ const emoteHandler = (msgObject, props) => {
     let emoteArray = []
     let emoteTag
 
+    //sort emote locations by index number
     for(const key in msgObject.emotes){
         msgObject.emotes[key].forEach((location)=>{
             emoteArray.push([key, parseInt(location.split('-')[0]), location])
         })
     }
     emoteArray.sort((a, b)=> {return (a[1] < b[1]) ? -1 : 1})
-    console.log(emoteArray)
 
     if(typeof msgObject.msg === 'string'){
 
@@ -30,24 +29,29 @@ const emoteHandler = (msgObject, props) => {
 
             stringExtend = stringExtend + parseInt(emoteData[0].length+1) - (parseInt(stringIndex[1])-parseInt(stringIndex[0]) +1)
 
-
             splitCode = part
         })
 
         splitCode = [splitCode]  
 
+        //replace ids with img tags
         emoteArray.forEach((emoteData)=>{
             let newKey = emoteData[0] + emoteData[1]
-            console.log(newKey)
+
             splitCode.forEach((part)=>{
                 let index = splitCode.indexOf(part)
+
                 if(typeof part === 'string'){
+                    //split at all ids and rejoin with id at all but first instance of id
                     part = part.split('#' + emoteData[0])
-                    
                     if(part.length > 1){
+                        let endPart = part
+                        part = [endPart.shift(), endPart.join('#' + emoteData[0])]
+                    }
 
+                    //insert img tag
+                    if(part.length > 1){
                         emoteTag = <img src={`https://static-cdn.jtvnw.net/emoticons/v1/${emoteData[0]}/1.0`} key={newKey} className={styles.emote} draggable="false" alt="Twitch Emote"/>
-
                         part.splice(1, 0, emoteTag)
                     }
 
@@ -55,13 +59,11 @@ const emoteHandler = (msgObject, props) => {
                     part = [part]
                 }
                 
-                splitCode.splice(index, 1, ...part)
+                splitCode.splice(index, 1, ...part) 
             })
         })
-        
-        console.log('splitCode', splitCode)            
+                  
     }
-console.log(msgObject.msg)
 
     if((new RegExp(props.emoteCodes.join('|'), 'gi')).test(msgObject.msg)){
         
@@ -77,7 +79,6 @@ console.log(msgObject.msg)
 
                 if(typeof part === 'string'){
                     part = part.split(emote.code)
-
                     
                     if(part.length > 1){
                         

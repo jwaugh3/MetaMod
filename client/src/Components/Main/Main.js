@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import apiCall from '../../functions/apiCall';
 import queryString from 'querystring';
+import { hotjar } from 'react-hotjar';
 //Components
 import TwitchChatModule from '../TwitchChatModule/TwitchChatModule';
 import ModChatModule from '../ModChatModule/ModChatModule';
@@ -12,6 +13,7 @@ import styles from './Main.module.css';
 import modIcon from '../../resources/modIcon.png';
 import io from 'socket.io-client';
 const socket = io('http://localhost:8888');
+
 
 class Main extends Component {
 
@@ -37,6 +39,8 @@ class Main extends Component {
   }
   
   componentDidMount = async () => {
+
+    hotjar.initialize(2097164, 6)
     
     //Get query from url
     let parsed = queryString.parse(window.location.search);
@@ -216,10 +220,15 @@ class Main extends Component {
 
       })
 
+      apiCall.getEmotes(newChannel)
+      .then((channelEmotes)=>{
+        this.setState({channelEmotes: channelEmotes[0], channelEmoteCodes: channelEmotes[1], channelEmoteIDByName: channelEmotes[2]})
+      })
+
   }
 
   clicked = () => {
-    console.log(this.state.modList)
+    console.log(this.state.channelEmotes)
   }
 
   render(){

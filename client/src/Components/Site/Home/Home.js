@@ -23,7 +23,7 @@ class Home extends Component {
                             Currently in Beta
                         </p>
                         <button onClick={()=> {window.location.href='http://localhost:3000/login'}}>
-                            Request Access
+                            Try the Demo
                         </button>
                     </div>
                     <div className={styles.bannerArtContainer}>

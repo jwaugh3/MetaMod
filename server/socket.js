@@ -26,8 +26,8 @@ const passChatMsg = (msgData) => {
 //handle moderator messages
 io.on('connection', (socket) => {
     console.log('connected to client')
-    socket.on('join', ({username, room, profileImage})=>{
-        const user = userJoin(socket.id, username, room, profileImage)
+    socket.on('join', ({username, room, profileImage, emotes})=>{
+        const user = userJoin(socket.id, username, room, profileImage, emotes)
 
         socket.join(user.room)
 
