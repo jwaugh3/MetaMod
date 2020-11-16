@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const queryString = require('querystring');
-const keys = require('../config/keys');
 const request = require('request');
 const { User, ChannelAccess } = require('../models/dbModels');
 const server = require('../bot/bot.js')
@@ -11,11 +10,11 @@ const cookieParser = require('cookie-parser');
 const cryptoJS = require('crypto-js');
 const randomString = require('randomstring');
 
-const REDIRECT_URI = 'http://localhost:5000/auth/redirected';
-const LOGGED_IN_URI = 'http://localhost:3000/dashboard';
-const LOGGED_OUT_URI = 'http://localhost:3000/login';
-const OAUTH_URI = 'http://localhost:5000/auth/login';
-const HOME_URI = 'http://localhost:3000/home'
+const REDIRECT_URI = process.env.BACK_END_URL + '/auth/redirected';
+const LOGGED_IN_URI = process.env.FRONT_END_URL + '/dashboard';
+const LOGGED_OUT_URI = process.env.FRONT_END_URL + '/login';
+const OAUTH_URI = process.env.BACK_END_URL + '/auth/login';
+const HOME_URI = process.env.FRONT_END_URL + '/home'
 
 //******************************************************************************************** MODIFY USE OF STATE */
 //handles redirect user to twitch's authentication login
@@ -23,12 +22,12 @@ router.get('/login', (req, res) => {
 	res.redirect(
 		'https://id.twitch.tv/oauth2/authorize?' +
 			queryString.stringify({
-				client_id: keys.twitch.clientID,
+				client_id: process.env.TWITCH_CLIENT_ID,
                 redirect_uri: REDIRECT_URI,
                 response_type: 'code',
 				scope:
                     'user:read:email moderation:read',
-                state: keys.twitch.state
+                state: process.env.TWITCH_AUTH_STATE
 			})
 	);
 });
@@ -72,7 +71,7 @@ router.get('/redirected', (req, res) => {
 	var code = req.query.code;
 	let state = req.query.state;
 	
-	if(state !== keys.twitch.state){
+	if(state !== process.env.TWITCH_AUTH_STATE){
 		res.redirect(LOGGED_OUT_URI)
 		return
 	}
@@ -81,9 +80,9 @@ router.get('/redirected', (req, res) => {
         'method': 'POST',
 		'url': `https://id.twitch.tv/oauth2/token?` +
 				queryString.stringify({
-					client_id: keys.twitch.clientID,
+					client_id: process.env.TWITCH_CLIENT_ID,
 					redirect_uri: REDIRECT_URI,
-					client_secret: keys.twitch.clientSecret,
+					client_secret: process.env.TWITCH_CLIENT_SECRET,
 					grant_type: 'authorization_code',
 					code: code
 				})
@@ -97,7 +96,7 @@ router.get('/redirected', (req, res) => {
 
 		var headers = {
 			'Authorization': 'Bearer ' + accessToken,
-			'Client-Id': keys.twitch.clientID
+			'Client-Id': process.env.TWITCH_CLIENT_ID
 		}; 
 
 		var userOptions = {
@@ -227,8 +226,8 @@ generateNewAccessToken = async (refreshToken) => {
 				queryString.stringify({
 					grant_type:'refresh_token',
 					refresh_token: refreshToken,
-					client_id: keys.twitch.clientID,
-					client_secret: keys.twitch.clientSecret
+					client_id: process.env.TWITCH_CLIENT_ID,
+					client_secret: process.env.TWITCH_CLIENT_SECRET
 				})
       };
 
@@ -251,12 +250,12 @@ generateUserToken = () => {
 
 encryptUserToken = (userToken) => {
 	console.log(userToken);
-	let encryptedToken = cryptoJS.AES.encrypt(userToken, keys.session.cookieKey).toString();
+	let encryptedToken = cryptoJS.AES.encrypt(userToken, process.env.COOKIE_KEY).toString();
 	return encryptedToken;
 };
 
 decryptUserToken = (encryptedToken) => {
-	let bytes = cryptoJS.AES.decrypt(encryptedToken, keys.session.cookieKey);
+	let bytes = cryptoJS.AES.decrypt(encryptedToken, process.env.COOKIE_KEY);
 	let userToken = bytes.toString(cryptoJS.enc.Utf8);
 	console.log('decrypted ', userToken);
 	return userToken;

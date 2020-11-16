@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const request = require('request');
-const keys = require('../config/keys');
 const { User, ChannelAccess, BttvEmote, FfzEmote } = require('../models/dbModels');
 const { client } = require('../bot/bot');
 

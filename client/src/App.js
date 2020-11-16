@@ -17,12 +17,12 @@ class App extends Component {
 
   render() {
     
-    const url ='http://localhost:3000/'
+    const url ='https://www.metamoderation.com'
 
     return ( 
       <div className={styles.app}>
         <Router>
-          <Route path='/' exact component={()=> window.location = 'http://localhost:5000/auth/userCheck'} url={url}/>
+          <Route path='/' exact component={()=> window.location = 'https://metamoderation.com/auth/userCheck'} url={url}/>
           <Route path='/home' exact component={Home} url={url}/>
           <Route path='/beta' exact component={Beta} url={url}/>
           <Route path='/about' exact component={About} url={url}/>

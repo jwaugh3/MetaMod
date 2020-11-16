@@ -12,8 +12,9 @@ const server = app.listen(8888);
 const http = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 app.use(cors({ origin: '*' }));
+require('dotenv').config()
 
-io.set('origins', 'http://localhost:3000');
+io.set('origins', process.env.FRONT_END_URL);
 
 //send twitch chat to client
 const passChatMsg = (msgData) => {
@@ -52,7 +53,7 @@ io.on('connection', (socket) => {
 
         if(user){
             socket.broadcast.to(user.room).emit('newModMsg', { username: user.username, time: 'three', userType: 'serverLeave', modMsg: '', sentBy: 'server' })
-
+ 
             io.to(user.room).emit('roomUsers', { 
                 room: user.room,
                 users: getRoomUsers(user.room)  
