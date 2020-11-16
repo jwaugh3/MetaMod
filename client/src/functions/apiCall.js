@@ -88,7 +88,7 @@ const getEmotes = async (channel) => {
     return [cleanEmotes, cleanEmoteCodes, emoteIDByName]
 }
 
-module.exports = {
+export default {
     getUserDetails,
     getMods,
     getEmotes
