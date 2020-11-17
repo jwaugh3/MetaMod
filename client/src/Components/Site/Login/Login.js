@@ -19,7 +19,7 @@ class Login extends Component {
 					<div className={styles.loginArtContainer}>
 						<img src={loginArt} className={styles.loginArt} alt="login"/>
 						<div className={styles.twitchLoginButtonContainer}>
-							<div className={styles.twitchLoginButton}  onClick={()=>window.location = '/auth/login'}>
+							<div className={styles.twitchLoginButton}  onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
 								<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 							</div>
 						</div>

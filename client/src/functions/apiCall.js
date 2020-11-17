@@ -1,4 +1,4 @@
-let apiURL = 'https://metamoderation/api/'
+let apiURL = 'https://api.metamoderation.com/api/'
 
 const getUserDetails = async (twitchID) => {
     let userDetails = new Promise((resolve, reject)=>{

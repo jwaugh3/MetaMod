@@ -49,9 +49,11 @@ app.get('/test', (req, res)=>{
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes)
 
+//add user
 updateBot.getChannels()
+
 updateBttvGlobalEmotes()
 
-const server = app.listen(process.env.PORT, ()=> {
+const server = app.listen(process.env.PORT, process.env.LOCAL_HOST, ()=> {
 	console.log('listening on port ' + process.env.PORT)
 });

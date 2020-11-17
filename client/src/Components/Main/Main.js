@@ -12,7 +12,7 @@ import styles from './Main.module.css';
 //Resources
 import modIcon from '../../resources/modIcon.png';
 import io from 'socket.io-client';
-const socket = io('https://metamoderation.com');
+const socket = io('https://api.metamoderation.com/socket');
 
 
 class Main extends Component {
