@@ -57,3 +57,5 @@ updateBttvGlobalEmotes()
 const server = app.listen(process.env.PORT, process.env.LOCAL_HOST, ()=> {
 	console.log('listening on port ' + process.env.PORT)
 });
+
+//test
