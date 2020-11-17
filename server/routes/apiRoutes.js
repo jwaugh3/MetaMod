@@ -4,7 +4,7 @@ const { User, ChannelAccess, BttvEmote, FfzEmote } = require('../models/dbModels
 const { client } = require('../bot/bot');
 
 router.get('/userData/:id', (req, res)=>{
-
+    console.log('hit')
     User.findOne({ twitch_ID: req.params.id }).then((singleUser)=>{
 
         ChannelAccess.findOne({login_username: singleUser.login_username}).then((access)=>{

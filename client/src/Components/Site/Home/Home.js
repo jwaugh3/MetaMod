@@ -22,7 +22,7 @@ class Home extends Component {
                         <p>
                             Currently in Beta
                         </p>
-                        <button onClick={()=> {window.location.href='http://localhost:3000/login'}}>
+                        <button onClick={()=> {window.location = '/login'}}>
                             Try the Demo
                         </button>
                     </div>

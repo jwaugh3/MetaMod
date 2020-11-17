@@ -9,28 +9,14 @@ const socket = require('./socket');
 const bot = require('./bot/bot');
 const updateBot = require('./bot/updateBot');
 const { updateBttvGlobalEmotes } = require('./utils/emotes/bttv');
+const path = require('path')
 require('dotenv').config()
-
-
-updateBttvGlobalEmotes()
 
 //server setup
 const app = express();
-app.use(cors({ origin: process.env.FRONT_END_URL }));
-
-const server = app.listen(process.env.PORT);
-// const http = require('http').createServer(app);
-
-//connect to mongodb
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (res) => {
-	console.log('connected to mongodb');
-});
-
-// ------------------------------------------------------------------Authorization
-//initialize cookie parser
-app.use(cookieParser(process.env.COOKIE_KEY));
 
 //cors setup
+app.use(cors({ origin: process.env.FRONT_END_URL }));
 app.use(function(req, res, next) {
 	// Website you wish to allow to connect
 	res.header('Access-Control-Allow-Origin', process.env.FRONT_END_URL );
@@ -46,8 +32,26 @@ app.use(function(req, res, next) {
 	next();
 });
 
+//initialize cookie parser
+app.use(cookieParser(process.env.COOKIE_KEY));
+
+//connect to mongodb
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (res) => {
+	console.log('connected to mongodb');
+});
+
+//test endpoint
+app.get('/test', (req, res)=>{
+	res.send('its working')
+})
+
 //authorization route
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes)
 
 updateBot.getChannels()
+updateBttvGlobalEmotes()
+
+const server = app.listen(process.env.PORT, ()=> {
+	console.log('listening on port ' + process.env.PORT)
+});

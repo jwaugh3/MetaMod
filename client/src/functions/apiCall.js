@@ -1,4 +1,4 @@
-let apiURL = 'http://localhost:5000/api/'
+let apiURL = 'https://metamoderation/api/'
 
 const getUserDetails = async (twitchID) => {
     let userDetails = new Promise((resolve, reject)=>{
@@ -88,7 +88,7 @@ const getEmotes = async (channel) => {
     return [cleanEmotes, cleanEmoteCodes, emoteIDByName]
 }
 
-module.exports = {
+export default {
     getUserDetails,
     getMods,
     getEmotes

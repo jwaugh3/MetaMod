@@ -22,7 +22,7 @@ class App extends Component {
     return ( 
       <div className={styles.app}>
         <Router>
-          <Route path='/' exact component={()=> window.location = 'https://metamoderation.com/auth/userCheck'} url={url}/>
+          <Route path='/' exact component={()=> window.location = '/auth/userCheck'} url={url}/>
           <Route path='/home' exact component={Home} url={url}/>
           <Route path='/beta' exact component={Beta} url={url}/>
           <Route path='/about' exact component={About} url={url}/>

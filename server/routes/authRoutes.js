@@ -16,17 +16,16 @@ const LOGGED_OUT_URI = process.env.FRONT_END_URL + '/login';
 const OAUTH_URI = process.env.BACK_END_URL + '/auth/login';
 const HOME_URI = process.env.FRONT_END_URL + '/home'
 
-//******************************************************************************************** MODIFY USE OF STATE */
 //handles redirect user to twitch's authentication login
 router.get('/login', (req, res) => {
+	console.log('hit here')
 	res.redirect(
 		'https://id.twitch.tv/oauth2/authorize?' +
 			queryString.stringify({
 				client_id: process.env.TWITCH_CLIENT_ID,
                 redirect_uri: REDIRECT_URI,
                 response_type: 'code',
-				scope:
-                    'user:read:email moderation:read',
+				scope: 'user:read:email moderation:read',
                 state: process.env.TWITCH_AUTH_STATE
 			})
 	);

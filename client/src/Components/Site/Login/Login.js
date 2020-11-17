@@ -19,7 +19,7 @@ class Login extends Component {
 					<div className={styles.loginArtContainer}>
 						<img src={loginArt} className={styles.loginArt} alt="login"/>
 						<div className={styles.twitchLoginButtonContainer}>
-							<div className={styles.twitchLoginButton}  onClick={()=>window.location = 'http://localhost:5000/auth/login'}>
+							<div className={styles.twitchLoginButton}  onClick={()=>window.location = '/auth/login'}>
 								<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 							</div>
 						</div>
