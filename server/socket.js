@@ -8,7 +8,9 @@ const {
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const server = app.listen(8888);
+const server = app.listen(8888, process.env.LOCAL_HOST, ()=>{
+    console.log('listening on 8888')
+});
 const http = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 app.use(cors({ origin: '*' }));
