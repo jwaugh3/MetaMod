@@ -13,7 +13,7 @@ const server = app.listen(8888, process.env.LOCAL_HOST, ()=>{
 });
 const http = require('http').createServer(app);
 const io = require('socket.io').listen(server);
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: process.env.FRONT_END_URL }));
 require('dotenv').config()
 
 io.set('origins', process.env.FRONT_END_URL);
