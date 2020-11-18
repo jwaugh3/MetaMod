@@ -1,8 +1,9 @@
-let apiURL = 'https://api.metamoderation.com/api/'
+// let apiURL = 'https://api.metamoderation.com/api/'
 
-const getUserDetails = async (twitchID) => {
+const getUserDetails = async (apiURL, twitchID) => {
+    console.log(apiURL + '/userData/' + twitchID)
     let userDetails = new Promise((resolve, reject)=>{
-        fetch(apiURL + 'userData/' + twitchID)
+        fetch(apiURL + '/api/userData/' + twitchID)
         .then((data)=>{
             data.json()
             .then((res)=>{
@@ -17,9 +18,9 @@ const getUserDetails = async (twitchID) => {
     return userDetails
 }
 
-const getMods = async (channel) => {
+const getMods = async (apiURL, channel) => {
     let mods = new Promise((resolve, reject)=>{
-        fetch(apiURL + 'getMods/' + channel)
+        fetch(apiURL + '/api/getMods/' + channel)
         .then((data)=>{
             data.json()
             .then((res)=>{
@@ -34,9 +35,9 @@ const getMods = async (channel) => {
     return mods
 }
 
-const getEmotes = async (channel) => {
+const getEmotes = async (apiURL, channel) => {
     let bttvChannelEmotes = await new Promise((resolve, reject)=>{
-        fetch(apiURL + 'getBttvEmotes/' + channel)
+        fetch(apiURL + '/api/getBttvEmotes/' + channel)
         .then((data)=>{
             data.json()
             .then((res)=>{
@@ -49,7 +50,7 @@ const getEmotes = async (channel) => {
     })
 
     let ffzChannelEmotes = await new Promise((resolve, reject)=>{
-        fetch(apiURL + 'getFfzEmotes/' + channel)
+        fetch(apiURL + '/api/getFfzEmotes/' + channel)
         .then((data)=>{
             data.json()
             .then((res)=>{

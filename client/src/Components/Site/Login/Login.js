@@ -12,6 +12,24 @@ import loginArt from '../../../resources/loginArt.png';
 class Login extends Component {
 
     render() {
+
+		let backendLink = []
+		if(window.location.host !== 'localhost:3000'){
+			console.log('here')
+			backendLink.push(
+				<div className={styles.twitchLoginButton} key="prod" onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
+					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
+				</div>
+			)
+		} else {
+			console.log('local')
+			backendLink.push(
+				<div className={styles.twitchLoginButton} key='local' onClick={()=>window.location = 'http://localhost:5000/auth/login'}>
+					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
+				</div>
+			)
+		}
+		
         return ( 
 			<Site>
 				<Navigation url={this.props.url} displayLogin={false}/>
@@ -19,9 +37,7 @@ class Login extends Component {
 					<div className={styles.loginArtContainer}>
 						<img src={loginArt} className={styles.loginArt} alt="login"/>
 						<div className={styles.twitchLoginButtonContainer}>
-							<div className={styles.twitchLoginButton}  onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
-								<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
-							</div>
+							{backendLink}
 						</div>
 					</div>
 				</div>

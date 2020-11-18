@@ -14,7 +14,7 @@ class Navigation extends Component {
         return ( 
             <nav className={styles.navContainer}>
                 <div className={styles.logoContainer}>
-                    <h1 className={styles.logoText} onClick={()=>window.location = '/home'}>MetaMod</h1>
+                    <h1 className={styles.logoText} onClick={()=>window.location = 'home'}>MetaMod</h1>
                 </div>
                 <div className={styles.navOptionsContainer}>
                     <ul className={styles.optionsList}>

@@ -11,8 +11,7 @@ import TwitchChatContent from '../TwitchChatModule/TwitchChatContent/TwitchChatC
 import styles from './Main.module.css';
 //Resources
 import modIcon from '../../resources/modIcon.png';
-import io from 'socket.io-client';
-const socket = io('https://api.metamoderation.com/socket');
+import socket from '../../socket';
 
 
 class Main extends Component {
@@ -40,6 +39,20 @@ class Main extends Component {
   
   componentDidMount = async () => {
 
+    if(window.location.host !== 'localhost:3000'){
+      await this.setState({
+        inProduction: true,
+        url: 'https://metamoderation.com',
+        apiEndpoint: 'https://api.metamoderation.com'
+      })
+    } else {
+      await this.setState({
+        inProduction: false,
+        url: 'http://localhost:3000',
+        apiEndpoint: 'http://localhost:5000'
+      })
+    }
+
     hotjar.initialize(2097164, 6)
     
     //Get query from url
@@ -49,7 +62,7 @@ class Main extends Component {
     
     this.setState({accessToken: accessToken, twitchID: twitchID})
 
-    await apiCall.getUserDetails(twitchID).then((userData)=>{
+    await apiCall.getUserDetails(this.state.apiEndpoint, twitchID).then((userData)=>{
       console.log(userData)
       this.setState({
         username: userData.username, 
@@ -60,11 +73,11 @@ class Main extends Component {
       })
     })
 
-    await apiCall.getEmotes(this.state.currentChannel).then((emoteData)=>{
+    await apiCall.getEmotes(this.state.apiEndpoint, this.state.currentChannel).then((emoteData)=>{
       this.setState({channelEmotes: emoteData[0], channelEmoteCodes: emoteData[1], channelEmoteIDByName: emoteData[2]})
     })
 
-    await apiCall.getMods(this.state.currentChannel).then((data)=>{
+    await apiCall.getMods(this.state.apiEndpoint, this.state.currentChannel).then((data)=>{
       this.setState({modList: data.mods})
     })
 
@@ -220,7 +233,7 @@ class Main extends Component {
 
       })
 
-      apiCall.getEmotes(newChannel)
+      apiCall.getEmotes(this.state.apiEndpoint, newChannel)
       .then((channelEmotes)=>{
         this.setState({channelEmotes: channelEmotes[0], channelEmoteCodes: channelEmotes[1], channelEmoteIDByName: channelEmotes[2]})
       })

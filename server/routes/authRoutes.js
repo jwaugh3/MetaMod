@@ -18,7 +18,6 @@ const HOME_URI = process.env.FRONT_END_URL + '/home'
 
 //handles redirect user to twitch's authentication login
 router.get('/login', (req, res) => {
-	console.log('hit here')
 	res.redirect(
 		'https://id.twitch.tv/oauth2/authorize?' +
 			queryString.stringify({

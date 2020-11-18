@@ -16,7 +16,7 @@ require('dotenv').config()
 const app = express();
 
 //cors setup
-app.use(cors({ origin: process.env.FRONT_END_URL }));
+app.use(cors({ origin: '*' }));
 app.use(function(req, res, next) {
 	// Website you wish to allow to connect
 	res.header('Access-Control-Allow-Origin', process.env.FRONT_END_URL );
