@@ -1,7 +1,5 @@
-// let apiURL = 'https://api.metamoderation.com/api/'
 
 const getUserDetails = async (apiURL, twitchID) => {
-    console.log(apiURL + '/userData/' + twitchID)
     let userDetails = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/userData/' + twitchID)
         .then((data)=>{

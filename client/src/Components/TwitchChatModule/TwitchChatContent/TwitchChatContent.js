@@ -26,6 +26,16 @@ class TwitchChatContent extends Component {
             if((new RegExp(this.props.emoteCodes.join('|'), 'gi')).test(msgObject.msg) || msgObject.emotes !== null){
                 msgObject.msg = emoteHandler(msgObject, this.props)
             }
+            console.log(msgObject)
+            if(msgObject.displayName === this.props.username) {
+                msgObject.displayColor = "#FF5E64"
+            } else if(msgObject.mod === true){
+                msgObject.displayColor = "#00FF7F"
+            } else if(msgObject.subscriber == true){
+                msgObject.displayColor = "#8B35D8"
+            } else if(msgObject.subscriber === false){
+                msgObject.displayColor = "#05A1E5"
+            } 
 
             let shouldDisplay = chatFilter(msgObject, this.props)
 
@@ -38,7 +48,11 @@ class TwitchChatContent extends Component {
                         onDragStart={this.dragStart}
                         onDragOver={this.dragOver}
                         >
-                        <p style={{color: `${msgObject.displayColor}`, display: 'inline-block', margin: '2px'}}>{msgObject.displayName}</p>
+                        <div className={styles.usernameContainer}
+                        style={{backgroundColor: `${msgObject.displayColor}`}}
+                        >
+                            <p className={styles.usernameText}>{msgObject.displayName}</p>
+                        </div>
                         : {msgObject.msg}
                     </div>
                 )

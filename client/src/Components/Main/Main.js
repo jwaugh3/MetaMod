@@ -63,7 +63,7 @@ class Main extends Component {
     this.setState({accessToken: accessToken, twitchID: twitchID})
 
     await apiCall.getUserDetails(this.state.apiEndpoint, twitchID).then((userData)=>{
-      console.log(userData)
+      // console.log(userData)
       this.setState({
         username: userData.username, 
         profileImage: userData.profileImage, 
@@ -82,7 +82,7 @@ class Main extends Component {
     })
 
     socket.on('roomUsers', (roomUsers)=>{
-      console.log(roomUsers)
+      // console.log(roomUsers)
       let newUsers = roomUsers.users
       this.setState({roomUsers: newUsers})
     })
@@ -91,7 +91,7 @@ class Main extends Component {
 
 
     socket.on('newModMsg', (modMsg)=>{
-      console.log(modMsg)
+      // console.log(modMsg)
         this.setState({modMsgs: [...this.state.modMsgs, modMsg]})
     })
   }
@@ -149,31 +149,31 @@ class Main extends Component {
     else if(setting === 'Subscriber Messages'){
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].subscribers = !this.state.moduleSettings[moduleNum].subscribers
-      console.log(newObject)
+      // console.log(newObject)
       this.setState({moduleSettings: newObject})
     }
     else if(setting === 'NonSubscriber Messages'){
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].nonsubscribers = !this.state.moduleSettings[moduleNum].nonsubscribers
-      console.log(newObject)
+      // console.log(newObject)
       this.setState({moduleSettings: newObject})
     }
     else if(setting === '@' + this.state.currentChannel){
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].directChat = !this.state.moduleSettings[moduleNum].directChat
-      console.log(newObject)
+      // console.log(newObject)
       this.setState({moduleSettings: newObject})
     }
     else if(setting === 'Emotes'){
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].emotes = !this.state.moduleSettings[moduleNum].emotes
-      console.log(newObject[moduleNum].emotes)
+      // console.log(newObject[moduleNum].emotes)
       this.setState({moduleSettings: newObject})
     }
     else if(setting === 'modMsgs'){
       let newObject = [...this.state.moduleSettings]
       newObject[moduleNum].modMsgs = !this.state.moduleSettings[moduleNum].modMsgs
-      console.log(newObject[moduleNum].modMsgs)
+      // console.log(newObject[moduleNum].modMsgs)
       this.setState({moduleSettings: newObject})
     }
   }
@@ -187,7 +187,7 @@ class Main extends Component {
   removeChatModule = (moduleNum) => {
     let moduleSettings = [...this.state.moduleSettings]
     moduleSettings.splice(moduleNum, 1)
-    console.log(moduleSettings)
+    // console.log(moduleSettings)
     this.setState({twitchChatCount: this.state.twitchChatCount -1, moduleSettings: moduleSettings})
   }
 
@@ -204,7 +204,7 @@ class Main extends Component {
   }
 
   pauseStateChatModule = (moduleNum) => {
-    console.log(this.state.twitchMessages)
+    // console.log(this.state.twitchMessages)
     let updatedPausedState = [...this.state.moduleSettings]
     updatedPausedState[moduleNum].paused = !this.state.moduleSettings[moduleNum].paused
     this.setState({moduleSettings: updatedPausedState})
@@ -240,9 +240,9 @@ class Main extends Component {
 
   }
 
-  clicked = () => {
-    console.log(this.state.channelEmotes)
-  }
+  // clicked = () => {
+  //   console.log(this.state.channelEmotes)
+  // }
 
   render(){
 
@@ -274,6 +274,7 @@ class Main extends Component {
           emotes={this.state.channelEmotes}
           emoteCodes={this.state.channelEmoteCodes}
           emoteIDByName={this.state.channelEmoteIDByName}
+          username={this.state.username}
         />
         </TwitchChatModule>
       )

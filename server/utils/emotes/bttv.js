@@ -12,7 +12,7 @@ const getBttvChannelEmotes = (channelID, channelName) => {
     request(options, (err, result, body)=>{
         let emoteData = JSON.parse(body)
         if(emoteData.message){
-            console.log('msg', emoteData.message)
+            // console.log('msg', emoteData.message)
         } else {
             let channelEmotes = []
 
@@ -47,7 +47,7 @@ const updateBttvChannelEmotes = (channelID, channelName) => {
     request(options, (err, result, body)=>{
         let emoteData = JSON.parse(body)
         if(emoteData.message){
-            console.log(emoteData.message)
+            // console.log(emoteData.message)
         } else {
             let channelEmotes = []
     
@@ -73,7 +73,7 @@ const updateBttvChannelEmotes = (channelID, channelName) => {
                     let dbVersion = response.emotes.sort((a, b)=> (a.code > b.code) ? 1 : -1)
                     let apiVersion = channelEmotes.sort((a, b)=> (a.code > b.code) ? 1 : -1)
                     let emoteEqual = lodash.isEqual(dbVersion, apiVersion)
-                    console.log(apiVersion)
+                    // console.log(apiVersion)
     
                     if(!emoteEqual){
                         BttvEmote.findOneAndUpdate({channel_ID: channelID}, {emotes: apiVersion}, {new: true, useFindAndModify: false}).then((data) => {

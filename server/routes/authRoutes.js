@@ -6,6 +6,7 @@ const server = require('../bot/bot.js')
 const { client } = require('../bot/bot');
 const { getBttvChannelEmotes, updateBttvChannelEmotes } = require('../utils/emotes/bttv');
 const { getFfzChannelEmotes, updateFfzChannelEmotes } = require('../utils/emotes/ffz');
+const { manageChannelAccess } = require('../utils/authFlow/manageChannelAccess')
 const cookieParser = require('cookie-parser');
 const cryptoJS = require('crypto-js');
 const randomString = require('randomstring');
@@ -32,10 +33,8 @@ router.get('/login', (req, res) => {
 
 
 router.get('/userCheck', (req, res)=>{
-	console.log('/HERE');
 	//set variables
 	let savedCookie = req.cookies.MM01;
-	console.log(savedCookie);
 
 	//if the cookie exists, attempt to find in DB
 	if (savedCookie) {
@@ -43,16 +42,15 @@ router.get('/userCheck', (req, res)=>{
 
 		//search for user, if not found then clear cookie
 		User.findOne({ user_token: retrievedToken }).then((result) => {
-			console.log(result);
+
 			if (!result) {
-				console.log('error');
+				console.log('error with cookie');
 				res.clearCookie("MM01")
 				res.redirect(LOGGED_OUT_URI);
 			} else {
 				let refreshToken = result.refresh_token;
 				let twitchID = result.twitch_ID
 				generateNewAccessToken(refreshToken).then((res) => JSON.parse(res)).then((data) => {
-					console.log('data', data);
 					res.redirect(LOGGED_IN_URI + '?access_token=' + data.access_token + '&twitch_id=' + twitchID);
 				});
 			}
@@ -65,10 +63,10 @@ router.get('/userCheck', (req, res)=>{
 
 //handles new and existing user login
 router.get('/redirected', (req, res) => {
-console.log('running redirected')
+
 	//set variables
 	var code = req.query.code;
-	let state = req.query.state;
+	let state = req.query.state; 
 	
 	if(state !== process.env.TWITCH_AUTH_STATE){
 		res.redirect(LOGGED_OUT_URI)
@@ -91,7 +89,6 @@ console.log('running redirected')
 		let bodyObject = JSON.parse(body)
 		var accessToken = bodyObject.access_token
         var refreshToken = bodyObject.refresh_token;
-		console.log(accessToken)
 
 		var headers = {
 			'Authorization': 'Bearer ' + accessToken,
@@ -107,18 +104,21 @@ console.log('running redirected')
 			let userObject = JSON.parse(body).data 
 			let twitch_ID = userObject[0].id
 			
-			console.log('about to find a user')
+
 			User.findOne({ twitch_ID }).then((existingUser) => {
-			console.log('db call success')
+
 				if (existingUser) {
 					//user exists
 					console.log('existing user:', existingUser.display_name);
+
+					//updates mods for channel access
+					manageChannelAccess(existingUser.login_username)
 
 					//update channel emotes
 					updateBttvChannelEmotes(existingUser.twitch_ID, existingUser.login_username)
 					updateFfzChannelEmotes(existingUser.twitch_ID, existingUser.login_username)
 
-					console.log('encrypt the following');
+					// console.log('encrypt the following');
 					res.cookie('MM01', encryptUserToken(existingUser.user_token), {
 						maxAge: 345 * 24 * 60 * 60 * 1000,
 						httpOnly: true 
@@ -146,61 +146,12 @@ console.log('running redirected')
 							//get FFZ channel emotes
 							getFfzChannelEmotes(userObject[0].id.toString(), userObject[0].login)
 
-							//check if channel access exists for user and mods
-							client.mods(userObject[0].login)
-								.then((data)=>{
-									console.log('data', data)
-									//create login users channel access
-									ChannelAccess.findOne({login_username: userObject[0].login}).then((existingLogin)=>{
-										if(!existingLogin){
-											new ChannelAccess({
-												login_username: userObject[0].login,
-												channel_access: [userObject[0].login]
-											})
-											.save()
-											.then((user)=>{
-												console.log('user', user)
-											})
-										} else {
-											let newAccess = data
-											newAccess.push(userObject[0].login)
-											ChannelAccess.findOneAndUpdate({login_username: userObject[0].login}, {channel_access: newAccess}, {new: true, useFindAndModify: false})
-										}
-									})
-									 
-									//create or update all mods channel access
-									data.forEach(async (mod)=>{
-										console.log(mod)
-
-										ChannelAccess.findOne({'login_username':mod}).then((userCheck)=>{
-											if(userCheck && userCheck.channel_access.includes(userObject[0].login)){
-												console.log('access already exists, no need to modify')
-											} else {
-												ChannelAccess.findOneAndUpdate({'login_username': mod}, {$push: {channel_access: userObject[0].login}}, {useFindAndModify: false}).then((user)=>{
-													if(user){
-														console.log('user', user)
-													} else {
-														new ChannelAccess({
-															login_username: mod,
-															channel_access: [mod, userObject[0].login]
-														})
-														.save()
-														.then((newUser)=>{
-															console.log(newUser)
-														})
-													}
-												})
-											}
-										})
-									})
-								})  
-								.catch((err)=>{
-									console.log(err)
-								})
+							//check if channel access exists for user and mods and if not updates/creates
+							manageChannelAccess(userObject[0].login)
 							
 							console.log('new user created: ' + newUser.twitch_ID);
 
-							console.log('encrypt the following');
+							// console.log('encrypt the following');
 							res.cookie('MM01', encryptUserToken(newUser.user_token), {
 								maxAge: 345 * 24 * 60 * 60 * 1000,
 								httpOnly: true
@@ -219,7 +170,7 @@ console.log('running redirected')
 //--------------------------------------Functional Assets
 generateNewAccessToken = async (refreshToken) => {
 	//set variables
-	console.log(refreshToken);
+	// console.log(refreshToken);
 	var options = {
         'method': 'POST',
 		'url': `https://id.twitch.tv/oauth2/token?` +
@@ -236,7 +187,6 @@ generateNewAccessToken = async (refreshToken) => {
 			if (err) {
 				reject(err);
 			} else {
-				console.log(body)
 				resolve(body);
 			}
 		});
@@ -249,7 +199,6 @@ generateUserToken = () => {
 };
 
 encryptUserToken = (userToken) => {
-	console.log(userToken);
 	let encryptedToken = cryptoJS.AES.encrypt(userToken, process.env.COOKIE_KEY).toString();
 	return encryptedToken;
 };
@@ -257,7 +206,6 @@ encryptUserToken = (userToken) => {
 decryptUserToken = (encryptedToken) => {
 	let bytes = cryptoJS.AES.decrypt(encryptedToken, process.env.COOKIE_KEY);
 	let userToken = bytes.toString(cryptoJS.enc.Utf8);
-	console.log('decrypted ', userToken);
 	return userToken;
 };
 

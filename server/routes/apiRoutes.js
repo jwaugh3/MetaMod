@@ -4,7 +4,7 @@ const { User, ChannelAccess, BttvEmote, FfzEmote } = require('../models/dbModels
 const { client } = require('../bot/bot');
 
 router.get('/userData/:id', (req, res)=>{
-    console.log('hit')
+
     User.findOne({ twitch_ID: req.params.id }).then((singleUser)=>{
 
         ChannelAccess.findOne({login_username: singleUser.login_username}).then((access)=>{
@@ -13,8 +13,12 @@ router.get('/userData/:id', (req, res)=>{
                 let channelAccess = []
 
                 access.channel_access.forEach((channel)=>{
+
                     let index = accessableUsers.findIndex((user) => {return (user.login_username === channel)})
-                    channelAccess.push({channel: channel, channelImage: accessableUsers[index].profile_image })
+
+                    if(index != -1){
+                        channelAccess.push({channel: channel, channelImage: accessableUsers[index].profile_image })
+                    }
                 })
 
                 let returnUserData = { 

@@ -4,7 +4,7 @@ const users = []
 const userJoin = (id, username, room, profileImage) => {
     const user = { id, username, room, profileImage }
     users.push(user)
-console.log(users)
+
     return user
 }
 

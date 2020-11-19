@@ -46,6 +46,7 @@
 	font-weight: bold;
 	border-radius: 6px;
 	margin: auto;
+	box-shadow: 1px 1px 4px black;
 } 
 
 .modIcon {
@@ -77,7 +78,7 @@
 	margin: auto;
 	width: 42px;
 	border-radius: 50%;
-	box-shadow: -1px 1px 4px black;
+	box-shadow: 1px 1px 4px black;
 }
 
 .channelImage {
@@ -87,7 +88,7 @@
 	width: 40px;
 	border-radius: 50%;
 	filter: grayscale(100%);
-	box-shadow: -1px 1px 4px black;
+	box-shadow: 1px 1px 4px black;
 }
 
 .profileImageContainer {

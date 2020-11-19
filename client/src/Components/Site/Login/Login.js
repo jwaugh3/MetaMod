@@ -15,14 +15,14 @@ class Login extends Component {
 
 		let backendLink = []
 		if(window.location.host !== 'localhost:3000'){
-			console.log('here')
+			// console.log('here')
 			backendLink.push(
 				<div className={styles.twitchLoginButton} key="prod" onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 				</div>
 			)
 		} else {
-			console.log('local')
+			// console.log('local')
 			backendLink.push(
 				<div className={styles.twitchLoginButton} key='local' onClick={()=>window.location = 'http://localhost:5000/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>

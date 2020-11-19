@@ -20,15 +20,11 @@ app.use(function(req, res, next) {
         // to the API (e.g. in case you use sessions)
         res.header('Access-Control-Allow-Credentials', true);
 
-	console.log('app.use set headers')
         // Pass to next layer of middleware
         next();
 });
 
 const http = require('http').createServer(app);
-//const server = app.listen(8888, process.env.LOCAL_HOST, ()=>{
-//	console.log(`listening at : ${process.env.LOCAL_HOST}:${8888}`)
-//});
 const io = require('socket.io')(http, {
 	path: '/socket'
 });
@@ -41,16 +37,15 @@ require('dotenv').config()
 const passChatMsg = (msgData) => {
     if(checkRoom(msgData.channel)){
         io.to(msgData.channel).emit(msgData.channel, (msgData))
-        console.log('sent to', msgData)
     }
 }
 
 //handle moderator messages
 io.on('connection', (socket) => {
-    console.log('connected to client')
+    
     socket.on('join', ({username, room, profileImage, emotes})=>{
         const user = userJoin(socket.id, username, room, profileImage, emotes)
-	console.log('loggin user object from socket.on join', user)
+
         socket.join(user.room)
 
         //Broadcast when a user connects

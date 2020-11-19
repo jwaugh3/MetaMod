@@ -10,11 +10,10 @@ const getFfzChannelEmotes = (channelID, channelName) => {
     };
 
     request(options, (err, result, body)=>{
-        console.log(JSON.parse(body).error)
+
         if(JSON.parse(body).error){
             console.log(body.message)
         } else {
-            console.log(body)
             let emoteData = JSON.parse(body)
             let set = emoteData.room.set
             let channelEmotes = []
@@ -68,7 +67,6 @@ const updateFfzChannelEmotes = (channelID, channelName) => {
                 }
                 channelEmotes.push(emote)
             })
-            // console.log(channelEmotes)
     
             FfzEmote.findOne({channel_ID: channelID}).then((response)=>{
                 if(response === null){
@@ -86,7 +84,7 @@ const updateFfzChannelEmotes = (channelID, channelName) => {
     
                     if(!emoteEqual){
                         FfzEmote.findOneAndUpdate({channel_ID: channelID}, {emotes: apiVersion}, {new: true, useFindAndModify: false}).then((data)=>{
-                            console.log(data)
+                            // console.log(data)
                         })
                     }
                 }
@@ -104,7 +102,7 @@ const updateFfzGlobalEmotes = () => {
     
     request(options, (err, result, body)=>{
         let emoteData = JSON.parse(body)
-        console.log(emoteData)
+
         let set = emoteData['default_sets']
 
         if(emoteData.message){

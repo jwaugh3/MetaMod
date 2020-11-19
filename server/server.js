@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 	// to the API (e.g. in case you use sessions)
 	res.setHeader('Access-Control-Allow-Credentials', true);
 
-	// Pass to next layer of middleware
+	// Pass to next layer of middleware 
 	next();
 });
 
@@ -38,13 +38,7 @@ app.use(cookieParser(process.env.COOKIE_KEY));
 //connect to mongodb
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (res) => {
 	console.log('connected to mongodb');
-	console.log(res)
 });
-
-//test endpoint
-app.get('/test', (req, res)=>{ 
-	res.send('its really reaally working')
-})
 
 //authorization route
 app.use('/auth', authRoutes);
@@ -58,5 +52,3 @@ updateBttvGlobalEmotes()
 const server = app.listen(process.env.PORT, process.env.LOCAL_HOST, ()=> {
 	console.log('listening on port ' + process.env.PORT)
 });
-
-//test
