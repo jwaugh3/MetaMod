@@ -7,31 +7,35 @@ const {
   } = require('./utils/roomUsers/roomManagement');
 const express = require('express');
 const app = express();
-const cors = require('cors');
-const server = app.listen(8888, process.env.LOCAL_HOST, ()=>{
-    console.log('listening on 8888')
-});
-const http = require('http').createServer(app);
-const io = require('socket.io').listen(server);
-app.use(cors({ origin: process.env.FRONT_END_URL }));
+//const cors = require('cors');
+//app.use(cors({ origin: process.env.FRONT_END_URL }));
 app.use(function(req, res, next) {
-	// Website you wish to allow to connect
-	res.header('Access-Control-Allow-Origin', );
+        // Website you wish to allow to connect
+        res.header('Access-Control-Allow-Origin', "https://metamoderation.com" );
 
-	// Request methods you wish to allow
-	res.header('Access-Control-Allow-Methods', 'GET, POST');
+        // Request methods you wish to allow
+        res.header('Access-Control-Allow-Methods', 'GET, POST');
 
-	// Set to true if you need the website to include cookies in the requests sent
-	// to the API (e.g. in case you use sessions)
-	res.header('Access-Control-Allow-Credentials', true);
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        res.header('Access-Control-Allow-Credentials', true);
 
-	// Pass to next layer of middleware
-	next();
+	console.log('app.use set headers')
+        // Pass to next layer of middleware
+        next();
+});
+
+const http = require('http').createServer(app);
+//const server = app.listen(8888, process.env.LOCAL_HOST, ()=>{
+//	console.log(`listening at : ${process.env.LOCAL_HOST}:${8888}`)
+//});
+const io = require('socket.io')(http, {
+	path: '/socket'
 });
 
 require('dotenv').config()
 
-io.set('origins', process.env.FRONT_END_URL);
+//io.set('origins', process.env.FRONT_END_URL);
 
 //send twitch chat to client
 const passChatMsg = (msgData) => {
@@ -46,7 +50,7 @@ io.on('connection', (socket) => {
     console.log('connected to client')
     socket.on('join', ({username, room, profileImage, emotes})=>{
         const user = userJoin(socket.id, username, room, profileImage, emotes)
-
+	console.log('loggin user object from socket.on join', user)
         socket.join(user.room)
 
         //Broadcast when a user connects
@@ -92,7 +96,11 @@ io.on('connection', (socket) => {
 
     })
  
-}) 
+})
+
+http.listen(8888, process.env.LOCAL_HOST, ()=>{
+	console.log('listening on port 8888')
+})
  
 module.exports = {
     passChatMsg 

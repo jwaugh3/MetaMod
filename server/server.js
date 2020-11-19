@@ -38,6 +38,7 @@ app.use(cookieParser(process.env.COOKIE_KEY));
 //connect to mongodb
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (res) => {
 	console.log('connected to mongodb');
+	console.log(res)
 });
 
 //test endpoint

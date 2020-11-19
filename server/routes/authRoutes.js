@@ -65,6 +65,7 @@ router.get('/userCheck', (req, res)=>{
 
 //handles new and existing user login
 router.get('/redirected', (req, res) => {
+console.log('running redirected')
 	//set variables
 	var code = req.query.code;
 	let state = req.query.state;
@@ -106,8 +107,9 @@ router.get('/redirected', (req, res) => {
 			let userObject = JSON.parse(body).data 
 			let twitch_ID = userObject[0].id
 			
-
+			console.log('about to find a user')
 			User.findOne({ twitch_ID }).then((existingUser) => {
+			console.log('db call success')
 				if (existingUser) {
 					//user exists
 					console.log('existing user:', existingUser.display_name);
