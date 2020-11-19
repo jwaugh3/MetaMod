@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 //test endpoint
 app.get('/test', (req, res)=>{ 
-	res.send('its working')
+	res.send('its really reaally working')
 })
 
 //authorization route
