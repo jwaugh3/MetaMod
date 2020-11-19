@@ -95,7 +95,7 @@ const updateBttvGlobalEmotes = () => {
         let emoteData = JSON.parse(body)
         let channelEmotes = []
 
-        emoteData.forEach((emoteObject)=>{
+        emoteData.forEach((emoteObject)=>{ 
             let emote = {
                 origin: 'bttv',
                 emote_ID: emoteObject.id, 

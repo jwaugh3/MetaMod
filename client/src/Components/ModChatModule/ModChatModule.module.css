@@ -6,7 +6,7 @@
     min-width: 300px;
     margin: 10px 6px 6px 12px;
     position: relative;
-    background-color:#272727;
+    background-color: #525153;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
 }
@@ -15,7 +15,7 @@
     position: relative;
     margin: auto 6px;
 	border-radius: 8px;
-    background-color:#272727;
+    background-color: #525153;
     height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -84,7 +84,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
-    background-color: #18181b;
+    background-color: #525153;
 }
 
 .inputBox {

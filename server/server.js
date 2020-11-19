@@ -41,7 +41,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 });
 
 //test endpoint
-app.get('/test', (req, res)=>{
+app.get('/test', (req, res)=>{ 
 	res.send('its working')
 })
 

@@ -58,7 +58,7 @@
 }
 
 .optionText:hover {
-    color: #FF6E6E;
+    color: #05A1E5;
 }
 
 .loginButtonContainer {
@@ -79,7 +79,7 @@
     font-family: 'Roboto';
     font-size: 28px;
     font-weight: 300;
-    background-color: #FF6E6E;
+    background-color: #05A1E5;
     position: relative;
     color: white;
     box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.905);
@@ -88,5 +88,5 @@
 }
 
 .loginButton:hover {
-    background-color: #ff6e6ed2;
+    background-color: #4ac7fd;
 }

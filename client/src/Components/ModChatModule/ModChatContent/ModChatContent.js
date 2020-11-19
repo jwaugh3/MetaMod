@@ -21,7 +21,7 @@ class ModChatContent extends Component {
                             <img className={styles.msgImg} src={this.props.profileImage} alt="Mod"/>
                             <p className={styles.modUsername}>{msgObject.username}</p>
                         </div>
-                        <div className={styles.msgText}  style={{backgroundColor: 'rgb(39, 39, 39)'}}>
+                        <div className={styles.msgText}  style={{backgroundColor: '#2C2E33'}}>
                             {msgObject.modMsg}
                         </div>
                     </div>
@@ -37,7 +37,7 @@ class ModChatContent extends Component {
                             <img className={styles.msgImg} src={msgObject.profileImage} alt="Mod"/>
                             <p className={styles.modUsername}>{msgObject.username}</p>
                         </div>
-                        <div className={styles.msgText}  style={{backgroundColor: 'rgb(39, 39, 39)'}}>
+                        <div className={styles.msgText}  style={{backgroundColor: '#2C2E33'}}>
                             {msgObject.modMsg}
                         </div>
                     </div>
