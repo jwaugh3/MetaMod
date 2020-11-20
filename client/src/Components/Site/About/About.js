@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import Site from '../Site';
 import Navigation from '../Navigation/Navigation';
 //Styles
-// import styles from './About.module.css';
+import styles from './About.module.css';
 //Assets
 
 
@@ -14,8 +14,8 @@ class About extends Component {
         return ( 
             <Site>
                 <Navigation url={this.props.url} displayLogin={true}/>
-                <div>
-
+                <div className={styles.aboutContainer}>
+                    <h1 className={styles.notice}>Page In Progress :O</h1>
                 </div>
             </Site>
         );

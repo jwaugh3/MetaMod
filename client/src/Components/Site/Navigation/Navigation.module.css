@@ -26,6 +26,22 @@
     font-size: 30px;
     cursor: pointer;
     user-select: none;
+    color: white;
+}
+
+.logoText:hover {
+    color: #05A1E5;
+}
+
+.activeLogo {
+    /* position: absolute; */
+    width: 40px;
+    height: 5px;
+    background-color: #05A1E5;
+    margin: auto;
+    margin-top: -2px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px rgb(0, 0, 0);
 }
 
 .navOptionsContainer {
@@ -55,6 +71,7 @@
     margin: auto;
     cursor: pointer;
     user-select: none;
+    color: white;
 }
 
 .optionText:hover {
@@ -78,10 +95,10 @@
     border-radius: 5px;
     font-family: 'Roboto';
     font-size: 28px;
-    font-weight: 300;
+    font-weight: 400;
     background-color: #05A1E5;
     position: relative;
-    color: white;
+    color: black;
     box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.905);
     cursor: pointer;
     user-select: none;
@@ -89,4 +106,13 @@
 
 .loginButton:hover {
     background-color: #4ac7fd;
+}
+
+.active {
+    width: 40px;
+    height: 5px;
+    background-color: #05A1E5;
+    margin: auto;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px rgb(0, 0, 0);
 }

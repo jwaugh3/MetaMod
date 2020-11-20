@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import Site from '../Site';
 import Navigation from '../Navigation/Navigation';
 //Styles
-// import styles from './Contact.module.css';
+import styles from './Contact.module.css';
 //Assets
 
 
@@ -14,8 +14,8 @@ class Contact extends Component {
         return ( 
             <Site>
                 <Navigation url={this.props.url} displayLogin={true}/>
-                <div>
-
+                <div className={styles.contactContainer}>
+                    <h1 className={styles.notice}>Page In Progress :P</h1>
                 </div>
             </Site>
         );
