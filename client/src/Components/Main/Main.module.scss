@@ -3,13 +3,35 @@
 	height: 100vh;
 	background-color:#222222;
 	margin: 0px;
-	position: absolute;
+	position: relative;
 	overflow: hidden;
+	z-index: 1;
 }
 
+.star {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  z-index: -1;
+}
+    
+@for $i from 1 through 15{
+  .star:nth-child(#{$i}){
+	position: absolute;
+    bottom: random(100) + vh;
+    left: random(100) + vw;
+    opacity: random() + .3;
+	font-size: random(20) + 8 + px;
+	transform: rotateZ(random(360) + deg);
+  }
+} 
+  
 .module {
 	width: 100%;
 	color: white;
+	z-index: 3;
 }
 
 .navbar {
@@ -61,6 +83,7 @@
 .chatModules {
 	margin-left: 80px;
 	display: flex;
+	position: absolute;
 }
 
 .modListContainer {

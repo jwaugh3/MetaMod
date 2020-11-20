@@ -8,7 +8,7 @@ import ModChatModule from '../ModChatModule/ModChatModule';
 import ModChatContent from '../ModChatModule/ModChatContent/ModChatContent';
 import TwitchChatContent from '../TwitchChatModule/TwitchChatContent/TwitchChatContent';
 //Styles
-import styles from './Main.module.css';
+import styles from './Main.module.scss';
 //Resources
 import modIcon from '../../resources/modIcon.png';
 import socket from '../../socket';
@@ -288,6 +288,8 @@ class Main extends Component {
       )
     })
 
+    let backgroundMask = Array(15).fill(<div className={styles.star}>+</div>)
+
     return (
       <div className={styles.application}>
         <div className={styles.navbar}>
@@ -330,6 +332,7 @@ class Main extends Component {
           </ModChatModule>
           {chatModules}
         </div>
+        {backgroundMask}
       </div>
     );
   }
