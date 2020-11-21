@@ -37,3 +37,24 @@
     display: flex;
     cursor: pointer;
 }
+
+.accept {
+    position: absolute;
+    left: 41%;
+    top: 380px;
+    color: white;
+    width: 360px;
+    text-align: center;
+}
+
+.policyLink {
+    color: white;
+    bottom: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin: auto;
+}
+
+.policyLink:hover {
+    color: rgb(125, 180, 240);
+}

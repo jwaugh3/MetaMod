@@ -7,6 +7,7 @@ import Beta from './Components/Site/Beta/Beta';
 import About from './Components/Site/About/About';
 import Contact from './Components/Site/Contact/Contact';
 import Login from './Components/Site/Login/Login';
+import Policy from './Components/Site/Policy/Policy';
 import Main from './Components/Main/Main';
 //Styles
 import styles from './App.module.css';
@@ -46,6 +47,7 @@ class App extends Component {
       <div className={styles.app}>
         <Router>
           <Route path='/' exact component={Home}  url={url}/>
+          <Route path='/policy' exact component={Policy}  url={url}/>
           <Route path='/home' exact component={Home} url={url}/>
           <Route path='/beta' exact component={Beta} url={url}/>
           <Route path='/about' exact component={About} url={url}/>

@@ -16,6 +16,9 @@ class Site extends Component {
             <div className={styles.homeBackground}>
                 <div className={styles.homePageContainer}>
                     {this.props.children}
+                    <div>
+                        <p className={styles.policyLink}><a onClick={()=>window.location = '/policy'}>Review our Policies</a></p>
+                    </div>
                 </div>
             </div>
         );

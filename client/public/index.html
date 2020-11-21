@@ -7,11 +7,16 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Twitch Chat and Moderation Tool"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>MetaMod</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.wpcc.io/lib/1.0.2/cookieconsent.min.css"/>
+    <script src="https://cdn.wpcc.io/lib/1.0.2/cookieconsent.min.js" defer></script>
+    <script>
+      window.addEventListener("load", function(){window.wpcc.init({"corners":"normal","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}},"position":"top-right","padding":"large","margin":"large","content":{"href":"https://www.websitepolicies.com/policies/view/7ImcCGP1"}})});
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
       
       new Crate({
