@@ -288,7 +288,12 @@ class Main extends Component {
       )
     })
 
-    let backgroundMask = Array(15).fill(<div className={styles.star}>+</div>)
+    //set background star pattern
+    let backgroundMask = Array(15)
+    let iterator = backgroundMask.keys()
+    for(const key of iterator){
+      backgroundMask[key] = <div className={styles.star} key={key}>+</div>
+    }
 
     return (
       <div className={styles.application}>

@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
    
     socket.on('modMsg', (msg)=>{
         const user = getCurrentUser(socket.id)
+        console.log(msg)
         io.to(user.room).emit('newModMsg', msg) 
     })
 

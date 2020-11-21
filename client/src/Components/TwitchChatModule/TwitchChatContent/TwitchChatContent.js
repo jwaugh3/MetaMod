@@ -26,12 +26,11 @@ class TwitchChatContent extends Component {
             if((new RegExp(this.props.emoteCodes.join('|'), 'gi')).test(msgObject.msg) || msgObject.emotes !== null){
                 msgObject.msg = emoteHandler(msgObject, this.props)
             }
-            console.log(msgObject)
             if(msgObject.displayName === this.props.username) {
                 msgObject.displayColor = "#FF5E64"
             } else if(msgObject.mod === true){
                 msgObject.displayColor = "#00FF7F"
-            } else if(msgObject.subscriber == true){
+            } else if(msgObject.subscriber === true){
                 msgObject.displayColor = "#8B35D8"
             } else if(msgObject.subscriber === false){
                 msgObject.displayColor = "#05A1E5"

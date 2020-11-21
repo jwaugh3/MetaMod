@@ -14,34 +14,41 @@
     position: relative;
 }
 
-.logoText {
+.logoSubContainer {
     display: inline;
     position: absolute;
     margin: auto;
     left: 50%;
     transform: translateX(-50%);
     top: 32%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: -5px;
+}
+
+.logoText {
     font-family: 'Roboto';
     font-weight: 300;
     font-size: 30px;
     cursor: pointer;
     user-select: none;
     color: white;
+    margin: auto;
 }
 
 .logoText:hover {
     color: #05A1E5;
 }
 
-.activeLogo {
-    /* position: absolute; */
-    width: 40px;
-    height: 5px;
-    background-color: #05A1E5;
+.logo {
+    width: 45px;
     margin: auto;
-    margin-top: -2px;
-    border-radius: 6px;
-    box-shadow: 1px 1px 4px rgb(0, 0, 0);
+    margin-bottom: 5px;
+}
+
+.textContainer {
+    width: 140px;
+    margin-top: 8px;
 }
 
 .navOptionsContainer {

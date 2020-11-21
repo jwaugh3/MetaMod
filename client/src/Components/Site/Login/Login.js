@@ -11,33 +11,18 @@ import loginArt from '../../../resources/loginArt.png';
 
 class Login extends Component {
 
-	state={
-		accepted: false
-	}
-
-
     render() {
 
 		let backendLink = []
 		if(window.location.host !== 'localhost:3000'){
-			let link = ''
-			if(this.state.accepted){
-				link = 'https://api.metamoderation.com/auth/login'
-			}
-
 			backendLink.push(
-				<div className={styles.twitchLoginButton} key="prod" onClick={()=>window.location = link}>
+				<div className={styles.twitchLoginButton} key="prod" onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 				</div>
 			)
 		} else {
-			let link = ''
-			if(this.state.accepted){
-				link = 'https://api.metamoderation.com/auth/login'
-			}
-
 			backendLink.push(
-				<div className={styles.twitchLoginButton} key='local' onClick={()=>window.location = link}>
+				<div className={styles.twitchLoginButton} key='local' onClick={()=>window.location = 'http://localhost:5000/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 				</div>
 			)
@@ -52,8 +37,7 @@ class Login extends Component {
 						<div className={styles.twitchLoginButtonContainer}>
 							{backendLink}
 						</div>
-						<div className={styles.accept} onClick={()=>this.setState({accepted: !this.state.accepted},()=>{console.log(this.state.accepted)})}>
-							
+						<div className={styles.accept}>
 							<label>By logging in, you accept the <a onClick={()=>window.location = '/policy'} className={styles.policyLink}>Terms and Conditions and Privacy Policy</a></label>
 						</div>
 					</div>

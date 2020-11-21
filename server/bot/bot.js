@@ -20,7 +20,8 @@ const onMessageHandler = async (target, user, msg, self) => {
     passChatMsg({
         channel: target.substring(1), 
         displayName: user['display-name'], 
-        displayColor: user.color, msg: msg, 
+        displayColor: user.color, 
+        msg: msg, 
         subscriber: user.subscriber,
         mod: user.mod,
         emotes: user.emotes
@@ -29,9 +30,12 @@ const onMessageHandler = async (target, user, msg, self) => {
 
 const updateOpts = (action, channels) => {
     if(action === 'add'){
-        channels.map((channel)=>{
-            client.join('#' + channel)
-        }) 
+        channels.forEach((channel, i) => {
+            setTimeout(()=>{
+                client.join('#' + channel)
+                console.log('joined', channel)
+            }, i * 3000)  
+        })
     }
     if(action === 'remove'){
         opts.channels.slice(opts.channels.indexOf(channel), 1)
