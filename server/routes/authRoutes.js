@@ -25,7 +25,7 @@ router.get('/login', (req, res) => {
 				client_id: process.env.TWITCH_CLIENT_ID,
                 redirect_uri: REDIRECT_URI,
                 response_type: 'code',
-				scope: 'user:read:email moderation:read',
+				scope: 'user:read:email moderation:read channel:moderate',
                 state: process.env.TWITCH_AUTH_STATE
 			})
 	);
@@ -187,6 +187,7 @@ generateNewAccessToken = async (refreshToken) => {
 			if (err) {
 				reject(err);
 			} else {
+				console.log(body)
 				resolve(body);
 			}
 		});

@@ -27,12 +27,6 @@
 	transform: rotateZ(random(360) + deg);
   }
 } 
-  
-.module {
-	width: 100%;
-	color: white;
-	z-index: 3;
-}
 
 .navbar {
 	width: 80px;
@@ -78,12 +72,6 @@
 
 #addButton {
 	font-size: 23px;
-}
-
-.chatModules {
-	margin-left: 80px;
-	display: flex;
-	position: absolute;
 }
 
 .modListContainer {

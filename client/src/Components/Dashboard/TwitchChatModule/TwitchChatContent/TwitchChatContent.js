@@ -26,7 +26,6 @@ class TwitchChatContent extends Component {
             if((new RegExp(this.props.emoteCodes.join('|'), 'gi')).test(msgObject.msg) || msgObject.emotes !== null){
                 msgObject.msg = emoteHandler(msgObject, this.props)
             }
-            console.log(msgObject)
             if(msgObject.displayName === this.props.username) {
                 msgObject.displayColor = "#FF5E64"
             } else if(msgObject.mod === true){

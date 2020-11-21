@@ -4,8 +4,8 @@ import Settings from '../TwitchChatModule/Settings/Settings';
 //Styles
 import styles from './TwitchChatModule.module.css';
 //Assets
-import settingsIcon from '../../resources/setting-icon.png';
-import editIcon from '../../resources/editIcon.png';
+import settingsIcon from '../../../resources/setting-icon.png';
+import editIcon from '../../../resources/editIcon.png';
 
 class TwitchChatModule extends Component {
 

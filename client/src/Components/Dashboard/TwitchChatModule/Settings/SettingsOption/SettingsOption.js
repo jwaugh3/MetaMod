@@ -1,7 +1,7 @@
 //Files
 import React, {Component} from 'react';
 //Components
-import Auxiliary from '../../../../hoc/Auxiliary';
+import Auxiliary from '../../../../../hoc/Auxiliary';
 //Styles
 import styles from './SettingsOption.module.css';
 //Assets

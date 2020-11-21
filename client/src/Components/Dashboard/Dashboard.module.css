@@ -1,0 +1,11 @@
+.chatModules {
+	margin-left: 80px;
+	display: flex;
+	position: absolute;
+}
+
+.module {
+	width: 100%;
+	color: white;
+	z-index: 3;
+}
