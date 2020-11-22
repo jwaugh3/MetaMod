@@ -15,14 +15,12 @@ class Login extends Component {
 
 		let backendLink = []
 		if(window.location.host !== 'localhost:3000'){
-			// console.log('here')
 			backendLink.push(
 				<div className={styles.twitchLoginButton} key="prod" onClick={()=>window.location = 'https://api.metamoderation.com/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
 				</div>
 			)
 		} else {
-			// console.log('local')
 			backendLink.push(
 				<div className={styles.twitchLoginButton} key='local' onClick={()=>window.location = 'http://localhost:5000/auth/login'}>
 					<img src={twitchLoginButton} className={styles.twitchLoginButtonImg} alt="twitch login"/>
@@ -38,6 +36,9 @@ class Login extends Component {
 						<img src={loginArt} className={styles.loginArt} alt="login"/>
 						<div className={styles.twitchLoginButtonContainer}>
 							{backendLink}
+						</div>
+						<div className={styles.accept}>
+							<label>By logging in, you accept the <a onClick={()=>window.location = '/policy'} className={styles.policyLink}>Terms and Conditions and Privacy Policy</a></label>
 						</div>
 					</div>
 				</div>

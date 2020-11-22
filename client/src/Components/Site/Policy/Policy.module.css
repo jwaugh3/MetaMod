@@ -1,0 +1,19 @@
+.policyContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 30% 50% 10%;
+    height: 90vh;
+    overflow-y: scroll;
+}
+
+.terms {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    color: white;
+}
+
+.privacy {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    color: white;
+}

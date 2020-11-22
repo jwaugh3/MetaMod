@@ -1,4 +1,3 @@
-const tmi = require('tmi.js');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const express = require('express');

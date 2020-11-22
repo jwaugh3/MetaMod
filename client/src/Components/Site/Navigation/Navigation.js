@@ -3,23 +3,24 @@ import React, {Component} from 'react';
 //Components
 
 //Styles
-import styles from './Navigation.module.css';
+import styles from './Navigation.module.scss';
 //Assets
+import logo from '../../../resources/Logo.png';
 
 
 class Navigation extends Component {
 
     render() {
 
-        console.log(window.location.pathname)
-
         return ( 
             <nav className={styles.navContainer}>
                 <div className={styles.logoContainer}>
-                    <h1 className={styles.logoText} onClick={()=>window.location = 'home'}>
-                        MetaMod
-                        <div className={styles.activeLogo} style={window.location.pathname === '/home' || window.location.pathname === '/' ? {visibility: 'visible'} : {visibility: 'hidden'}}></div>
-                    </h1>
+                    <div className={styles.logoSubContainer} onClick={()=>window.location = 'home'}>
+                        <img src={logo} className={styles.logo} alt="logo"/>
+                        <div className={styles.textContainer}>
+                            <h1 className={styles.logoText}>MetaMod</h1>
+                        </div>
+                    </div>
                     
                 </div>
                 <div className={styles.navOptionsContainer}>

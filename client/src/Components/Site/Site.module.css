@@ -8,3 +8,15 @@
     background-color: #222222;
     margin: auto;
 }
+
+.policyLink {
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.policyLink:hover {
+    color: rgb(125, 180, 240);
+}
