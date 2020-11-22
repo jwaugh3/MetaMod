@@ -113,8 +113,20 @@ class Main extends Component {
 
     return (
       <div className={styles.application}>
+
+        {/* side nav */}
         <div className={styles.navbar}>
           <div className={styles.buttonContainer}>
+            
+          </div>
+          <div className={styles.modListContainer}>
+            {channelList}
+          </div>
+        </div>
+
+        {/* top nav */}
+        <div className={styles.topNavbar}>
+          <div className={styles.topNavButtonContainer}>
             <div className={styles.buttonSlot}>
               <button onClick={this.toggleModChatModule} className={styles.navButton} style={this.state.modChatEnabled ? {opacity: '100%'} : {opacity: '50%'}}>
                 <img className={styles.modIcon} src={modIcon} alt="Mod Icon"/>
@@ -123,9 +135,6 @@ class Main extends Component {
             <div className={styles.buttonSlot}>
               <button onClick={this.addTwitchChatModule} className={styles.navButton} id={styles.addButton}>+</button>
             </div>
-          </div>
-          <div className={styles.modListContainer}>
-            {channelList}
           </div>
         </div>
         
