@@ -140,6 +140,8 @@ router.get('/redirected', (req, res) => {
 						.save() 
 						.then((newUser) => {
 
+							updateOpts('add', [login_username])
+
 							//get BTTV channel emotes
 							getBttvChannelEmotes(userObject[0].id.toString(), userObject[0].login)
 
