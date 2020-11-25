@@ -3,7 +3,7 @@ const queryString = require('querystring');
 const request = require('request');
 const { User, ChannelAccess } = require('../models/dbModels');
 const server = require('../bot/bot.js')
-const { client } = require('../bot/bot');
+const { client, updateOpts } = require('../bot/bot');
 const { getBttvChannelEmotes, updateBttvChannelEmotes } = require('../utils/emotes/bttv');
 const { getFfzChannelEmotes, updateFfzChannelEmotes } = require('../utils/emotes/ffz');
 const { manageChannelAccess } = require('../utils/authFlow/manageChannelAccess')
@@ -139,6 +139,9 @@ router.get('/redirected', (req, res) => {
 					})
 						.save() 
 						.then((newUser) => {
+
+							//have bot join channel
+							updateOpts('add', [userObject[0].login])
 
 							//get BTTV channel emotes
 							getBttvChannelEmotes(userObject[0].id.toString(), userObject[0].login)
