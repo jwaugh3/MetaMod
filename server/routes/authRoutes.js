@@ -51,7 +51,7 @@ router.get('/userCheck', (req, res)=>{
 				let refreshToken = result.refresh_token;
 				let twitchID = result.twitch_ID
 				generateNewAccessToken(refreshToken).then((res) => JSON.parse(res)).then((data) => {
-					res.redirect(LOGGED_IN_URI + '?access_token=' + data.access_token + '&twitch_id=' + twitchID);
+					res.redirect(LOGGED_IN_URI + '?twitch_id=' + twitchID);
 				});
 			}
 		});
@@ -124,7 +124,7 @@ router.get('/redirected', (req, res) => {
 						httpOnly: true 
 					});
 
-					res.redirect(LOGGED_IN_URI + '?access_token=' + accessToken + '&twitch_id=' + twitch_ID);
+					res.redirect(LOGGED_IN_URI + '?twitch_id=' + twitch_ID);
 				} else {
 					//create new user 
 					new User({ 
@@ -158,7 +158,7 @@ router.get('/redirected', (req, res) => {
 							});
 						}) 
 						.then(() => {
-							res.redirect(LOGGED_IN_URI + '?access_token=' + accessToken + '&twitch_id=' + twitch_ID);
+							res.redirect(LOGGED_IN_URI + '?twitch_id=' + twitch_ID);
 						});
 				}
 			})

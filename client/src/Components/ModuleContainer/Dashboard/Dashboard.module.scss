@@ -1,0 +1,40 @@
+.chatModules {
+	display: flex;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.module {
+	width: 100%;
+	color: white;
+	z-index: 3;
+}
+
+.buttonSlot {
+	height: 45px;
+	width: 45px;
+	margin: auto;
+}
+
+.navButton {
+	height: 45px;
+	width: 45px;
+	user-select: none;
+	cursor: pointer;
+	background-color: #05A1E5;
+	border: none;
+	color: black;
+	font-weight: bold;
+	border-radius: 6px;
+	margin: auto;
+	box-shadow: 1px 1px 4px black;
+} 
+
+.modIcon {
+	width: 28px;
+	margin: auto;
+}
+
+#addButton {
+	font-size: 23px;
+}

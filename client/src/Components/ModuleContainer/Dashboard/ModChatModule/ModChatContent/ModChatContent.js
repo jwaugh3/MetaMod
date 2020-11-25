@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 //Styles
 import styles from './ModChatContent.module.css';
 //Assets
+//State Management
+import { connect } from 'react-redux';
 
 
 class ModChatContent extends Component {
@@ -89,5 +91,14 @@ class ModChatContent extends Component {
         );
     }
 }
-    
-export default ModChatContent;
+
+const mapStateToProps = (state) => {
+    return {
+      currentChannel: state.applicationReducer.currentChannel,
+      username: state.applicationReducer.username,
+      profileImage: state.applicationReducer.profileImage,
+      modMsgs: state.modChatReducer.modMsgs
+    }
+  }
+      
+export default connect(mapStateToProps, null)(ModChatContent);

@@ -6,6 +6,8 @@
 	position: relative;
 	overflow: hidden;
 	z-index: 1;
+	display: grid;
+	grid-template-columns: 120px calc(100vw - 120px);
 }
 
 .star {
@@ -15,6 +17,7 @@
   font-size: 30px;
   color: white;
   z-index: -1;
+  user-select: none;
 }
     
 @for $i from 1 through 15{
@@ -29,53 +32,18 @@
 } 
 
 .navbar {
-	width: 80px;
-	min-width: 80px;
+	width: 120px;
+	min-width: 120px;
 	height: 100%;
-	overflow: hidden;
+	// overflow: hidden;
 	background-color:#6D6C6D;
 	position: fixed;
 }
 
-.buttonContainer {
-	width: 80px;
-	display: grid;
-	grid-template-columns: 1fr;
-	margin-top: 15px;
-}
 
-.buttonSlot {
-	height: 56px;
-	margin: auto;
-}
-
-.navButton {
-	margin: 6px;
-	margin-top: 0px;
-	height: 48px;
-	width: 48px;
-	user-select: none;
-	cursor: pointer;
-	background-color: #05A1E5;
-	border: none;
-	color: black;
-	font-weight: bold;
-	border-radius: 6px;
-	margin: auto;
-	box-shadow: 1px 1px 4px black;
-} 
-
-.modIcon {
-	width: 33px;
-	margin: auto;
-}
-
-#addButton {
-	font-size: 23px;
-}
 
 .modListContainer {
-	width: 80px;
+	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-areas: "mod" "mod" "mod" "mod" "mod" "mod";
@@ -85,24 +53,60 @@
 
 .currentChannel {
 	grid-area: "mod";
-	margin: 0px;
-	margin: auto;
+	margin-left: 8px;
 	width: 42px;
+	height: 42px;
 	border-radius: 50%;
-	box-shadow: 1px 1px 4px black;
-}
-
-.channelImage {
-	grid-area: "mod";
-	margin: 0px;
-	margin: auto;
-	width: 40px;
-	border-radius: 50%;
-	filter: grayscale(100%);
 	box-shadow: 1px 1px 4px black;
 }
 
 .profileImageContainer {
 	height: 48px;
 	margin: auto;
+	width: 100%;
+	display: flex;
+	margin: auto;
+	overflow: hidden;
+}
+
+.channelImage {
+	grid-area: "mod";
+	margin-left: 5px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	filter: grayscale(100%);
+	box-shadow: 1px 1px 4px black;
+}
+
+.channelAccessName {
+	width: 65px;
+	color: white;
+	font-size: 12px;
+	text-align: left;
+	margin-left: 7px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.navSpacer {
+	width: 100%;
+	height: 70px;
+}
+
+.buttonContainer {
+	width: 100%;
+	height: 42px;
+	margin-left: 0px;
+	background:#606060;
+	border-radius: 0px 4px 4px 0px;
+}
+
+.navText {
+	padding: 11px;
+	float: right;
+	color: white;
+	font-family: 'Roboto';
+	font-weight: 300;
 }

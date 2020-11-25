@@ -36,6 +36,7 @@ require('dotenv').config()
 //send twitch chat to client
 const passChatMsg = (msgData) => {
     if(checkRoom(msgData.channel)){
+        console.log(msgData)
         io.to(msgData.channel).emit(msgData.channel, (msgData))
     }
 }

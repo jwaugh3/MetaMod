@@ -1,14 +1,14 @@
-const chatFilter = (msgObject, props) => {
+const chatFilter = (msgObject, moduleNum, props) => {
+    let moduleSettings = props.moduleSettings[moduleNum]
     let msg = msgObject.msg
     // var shouldDisplay = true
-
     //handles command display
-    if(typeof msg === 'string' && !props.moduleSettings.commands && msg.substring(0,1).includes('!')){ 
+    if(typeof msg === 'string' && !moduleSettings.commands && msg.substring(0,1).includes('!')){ 
         return false
      }
 
     //handles emote display
-    if(!props.moduleSettings.emotes && Array.isArray(msg)){ 
+    if(!moduleSettings.emotes && Array.isArray(msg)){ 
         let containsEmoteObj = msg.some((value) => {//check for emotes - returns boolean
             return typeof value == 'object'
         })
@@ -18,7 +18,7 @@ const chatFilter = (msgObject, props) => {
     }
 
     //handle @streamer display
-    if(!props.moduleSettings.directChat){
+    if(!moduleSettings.directChat){
         if(Array.isArray(msg)){ //handles direct messages with emotes
             msgObject.msg.forEach(el => {
                 if(typeof el === 'string' && el.toLowerCase().includes('@'+props.currentChannel)){
@@ -32,17 +32,17 @@ const chatFilter = (msgObject, props) => {
     }
 
     //handles mod messages
-    if(!props.moduleSettings.modMsgs && msgObject.mod){
+    if(!moduleSettings.modMsgs && msgObject.mod){
         return false
     }
 
     //handles subscriber messages
-    if(!props.moduleSettings.subscribers && msgObject.subscriber){
+    if(!moduleSettings.subscribers && msgObject.subscriber){
         return false
     }
 
     //handles nonsubscriber messages
-    if(!props.moduleSettings.nonsubscribers && !msgObject.subscriber){
+    if(!moduleSettings.nonsubscribers && !msgObject.subscriber){
         return false
     }
 

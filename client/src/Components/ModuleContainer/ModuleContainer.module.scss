@@ -1,0 +1,7 @@
+.moduleContainer {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 60px calc(100vh - 60px);
+}

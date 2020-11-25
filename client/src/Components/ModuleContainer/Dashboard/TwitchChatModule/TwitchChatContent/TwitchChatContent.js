@@ -6,6 +6,8 @@ import chatFilter from './logicHandlers/chatFilter';
 //Styles
 import styles from './TwitchChatContent.module.css';
 //Assets
+//State Management
+import { connect } from 'react-redux';
 
 
 class TwitchChatContent extends Component {
@@ -26,6 +28,7 @@ class TwitchChatContent extends Component {
             if((new RegExp(this.props.emoteCodes.join('|'), 'gi')).test(msgObject.msg) || msgObject.emotes !== null){
                 msgObject.msg = emoteHandler(msgObject, this.props)
             }
+            
             if(msgObject.displayName === this.props.username) {
                 msgObject.displayColor = "#FF5E64"
             } else if(msgObject.mod === true){
@@ -36,7 +39,7 @@ class TwitchChatContent extends Component {
                 msgObject.displayColor = "#05A1E5"
             } 
 
-            let shouldDisplay = chatFilter(msgObject, this.props)
+            let shouldDisplay = chatFilter(msgObject, this.props.moduleNum, this.props)
 
             if(shouldDisplay === true){
                 return(
@@ -69,5 +72,16 @@ class TwitchChatContent extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        username: state.applicationReducer.username,
+        moduleSettings: state.twitchChatReducer.moduleSettings,
+        twitchMessages: state.twitchChatReducer.twitchMessages,
+        emotes: state.twitchChatReducer.channelEmotes, 
+        emoteCodes: state.twitchChatReducer.channelEmoteCodes,
+        emoteIDByName: state.twitchChatReducer.channelEmoteIDByName
+    }
+}
     
-export default TwitchChatContent;
+export default connect(mapStateToProps, null)(TwitchChatContent);
