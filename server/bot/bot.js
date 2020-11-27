@@ -3,9 +3,12 @@ const { passChatMsg } = require('../socket');
 
 // Define configuration options
 const opts = {
+    connection:{
+        reconnect: true
+    },
     identity: {
-    username: "metamoderation",
-    password: "6iofm69e6vsvktwq4bsje1vxkmkkp5"
+        username: "metamoderation",
+        password: "6iofm69e6vsvktwq4bsje1vxkmkkp5"
     }
 }
 
