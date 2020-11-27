@@ -30,7 +30,7 @@ const manageChannelAccess = (username) => {
 
             ChannelAccess.findOne({'login_username':mod}).then((userCheck)=>{
                 if(userCheck && userCheck.channel_access.includes(username)){
-                    console.log('access already exists, no need to modify')
+                    // console.log('access already exists, no need to modify')
                 } else {
                     ChannelAccess.findOneAndUpdate({'login_username': mod}, {$push: {channel_access: username}}, {useFindAndModify: false}).then((user)=>{
                         if(user){

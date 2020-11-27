@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 //Styles
 import styles from './ModChatModule.module.css';
 //Assets
+//State Management
+import { connect } from 'react-redux';
 
 
 class ModChatModule extends Component {
@@ -46,7 +48,7 @@ class ModChatModule extends Component {
 
         return ( 
             <div className={styles.mainContainer} 
-                style={this.props.visibility ? {display: 'inline-block'} : {display: 'none'}}
+                style={this.props.modChatEnabled ? {display: 'inline-block'} : {display: 'none'}}
                 id={this.props.id}
                 draggable='false'
                 onDrop={this.drop}
@@ -74,4 +76,11 @@ class ModChatModule extends Component {
     }
 }
     
-export default ModChatModule;
+const mapStateToProps = (state) => {
+    return {
+        roomUsers: state.applicationReducer.roomUsers,
+        modChatEnabled: state.modChatReducer.modChatEnabled
+    }
+  }
+      
+export default connect(mapStateToProps, null)(ModChatModule);

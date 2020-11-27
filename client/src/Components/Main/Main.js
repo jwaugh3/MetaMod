@@ -1,40 +1,23 @@
 import React, { Component } from 'react';
-import apiCall from '../../functions/apiCall';
+import apiCall from '../../api/apiCall';
 import queryString from 'querystring';
-import { hotjar } from 'react-hotjar';
 //Components
-import TwitchChatModule from '../TwitchChatModule/TwitchChatModule';
-import ModChatModule from '../ModChatModule/ModChatModule';
-import ModChatContent from '../ModChatModule/ModChatContent/ModChatContent';
-import TwitchChatContent from '../TwitchChatModule/TwitchChatContent/TwitchChatContent';
+import Dashboard from '../ModuleContainer/Dashboard/Dashboard';
+import ModuleContainer from '../ModuleContainer/ModuleContainer';
 //Styles
 import styles from './Main.module.scss';
 //Resources
-import modIcon from '../../resources/modIcon.png';
 import socket from '../../socket';
-
+//State Management
+import { connect } from 'react-redux';
 
 class Main extends Component {
 
   state = {
-    modChatEnabled: true,
-    twitchChatCount: 1,
-    username: '',
-    login_username: '',
-    twitchID: '',
-    profileImage: '',
-    modMsg: '',
-    modMsgs: [],
-    twitchMessages: [],
-    moduleSettings: [ { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, commands: true, nonsubscribers: true, subscribers: true, directChat: true, emotes: true, modMsgs: true } ],
-    modList: [],
-    currentChannel: '',
-    channelAccess: [],
-    channelHistory: [],
-    roomUsers: [],
-    channelEmotes: [],
-    channelEmoteCodes: [],
-    channelEmoteIDByName: []
+    inProduction: true,
+    url: '',
+    apiEndpoint: '',
+    activeTab: 'Dashboard'
   }
   
   componentDidMount = async () => {
@@ -52,238 +35,77 @@ class Main extends Component {
         apiEndpoint: 'http://localhost:5000'
       })
     }
-
-    hotjar.initialize(2097164, 6)
     
     //Get query from url
     let parsed = queryString.parse(window.location.search);
-    let accessToken = parsed['?access_token'];
-    let twitchID = parsed['twitch_id']
-    
-    this.setState({accessToken: accessToken, twitchID: twitchID})
+    let twitchID = parsed['?twitch_id']
+    this.props.setTwitchID(twitchID)
 
-    await apiCall.getUserDetails(this.state.apiEndpoint, twitchID).then((userData)=>{
-      // console.log(userData)
-      this.setState({
-        username: userData.username, 
-        profileImage: userData.profileImage, 
-        login_username: userData.login_username, 
-        currentChannel: userData.login_username, 
-        channelAccess: userData.channelAccess
-      })
+    await apiCall.getUserDetails(this.state.apiEndpoint, this.props.twitchID).then((userData)=>{
+      //set global states
+      this.props.setCurrentChannel(userData.login_username)
+      this.props.setUsername(userData.username)
+      this.props.setLoginUsername(userData.login_username)
+      this.props.setProfileImage(userData.profileImage)
+      this.props.setChannelAccess(userData.channelAccess)
     })
 
-    await apiCall.getEmotes(this.state.apiEndpoint, this.state.currentChannel).then((emoteData)=>{
-      this.setState({channelEmotes: emoteData[0], channelEmoteCodes: emoteData[1], channelEmoteIDByName: emoteData[2]})
-    })
-
-    await apiCall.getMods(this.state.apiEndpoint, this.state.currentChannel).then((data)=>{
-      this.setState({modList: data.mods})
+    await apiCall.getMods(this.state.apiEndpoint, this.props.currentChannel).then((data)=>{
+      this.props.setModList(data.mods)
     })
 
     socket.on('roomUsers', (roomUsers)=>{
-      // console.log(roomUsers)
       let newUsers = roomUsers.users
-      this.setState({roomUsers: newUsers})
+      this.props.setRoomUsers(newUsers)
     })
 
-    this.changeChannel(this.state.currentChannel)
-
+    this.changeChannel(this.props.currentChannel)
 
     socket.on('newModMsg', (modMsg)=>{
-      // console.log(modMsg)
-        this.setState({modMsgs: [...this.state.modMsgs, modMsg]})
+      this.props.newModMsg(modMsg)
     })
-  }
 
-  addTwitchChatModule = () => {
-    if(this.state.twitchChatCount <= 3){
-      this.setState({
-        twitchChatCount: this.state.twitchChatCount +1, 
-        moduleSettings: [...this.state.moduleSettings,  { moduleName: '', settingsDisplay: false, editModuleName: false, paused: false, commands: true, nonsubscribers: true, subscribers: true, directChat: true, emotes: true, modMsgs: true } ]})
-    }
-  }
-
-  toggleModChatModule = () => {
-      this.setState({ modChatEnabled: !this.state.modChatEnabled }, () => {
-
-      })
-  }
-
-  inputChangedHandler = (event) => {
-    event.preventDefault();
-    this.setState({modMsg: event.target.value});
-  }
-
-  usernameHandler = (event) => {
-    this.setState({username: event.target.value})
-  }
-
-  onMessageSubmit = (event) => {
-    event.preventDefault();
-    
-    if(this.state.modMsg.length > 0){
-        document.getElementById('modTextInput').reset()
-        socket.emit('modMsg', {
-          username: this.state.username, 
-          time: 'three', 
-          userType: 'mod', 
-          modMsg: this.state.modMsg, 
-          sentBy: this.state.username,
-          profileImage: this.state.profileImage
+    apiCall.getEmotes(this.state.apiEndpoint, this.props.currentChannel)
+        .then((channelEmotes)=>{
+          this.props.addChannelEmotes(channelEmotes[0])
+          this.props.addChannelEmoteCodes(channelEmotes[1])
+          this.props.addChannelEmoteIDByName(channelEmotes[2])
         })
-        this.setState({modMsg: ''})
-    }
+
   }
 
-  transferTwitchMsg = (msg) =>{
-    socket.emit('modMsg', { username: '', time: '', userType: 'twitchUser', modMsg: msg, sentBy: this.state.username, profileImage: this.state.profileImage })
-  }
 
-  updateSettings = (setting, moduleNum) => {
-    if(setting === 'Commands'){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].commands = !this.state.moduleSettings[moduleNum].commands
-      this.setState({moduleSettings: newObject})
-    }
-    else if(setting === 'Subscriber Messages'){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].subscribers = !this.state.moduleSettings[moduleNum].subscribers
-      // console.log(newObject)
-      this.setState({moduleSettings: newObject})
-    }
-    else if(setting === 'NonSubscriber Messages'){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].nonsubscribers = !this.state.moduleSettings[moduleNum].nonsubscribers
-      // console.log(newObject)
-      this.setState({moduleSettings: newObject})
-    }
-    else if(setting === '@' + this.state.currentChannel){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].directChat = !this.state.moduleSettings[moduleNum].directChat
-      // console.log(newObject)
-      this.setState({moduleSettings: newObject})
-    }
-    else if(setting === 'Emotes'){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].emotes = !this.state.moduleSettings[moduleNum].emotes
-      // console.log(newObject[moduleNum].emotes)
-      this.setState({moduleSettings: newObject})
-    }
-    else if(setting === 'modMsgs'){
-      let newObject = [...this.state.moduleSettings]
-      newObject[moduleNum].modMsgs = !this.state.moduleSettings[moduleNum].modMsgs
-      // console.log(newObject[moduleNum].modMsgs)
-      this.setState({moduleSettings: newObject})
-    }
-  }
-
-  settingsToggle = (moduleNum) => {
-    let settings = [...this.state.moduleSettings]
-    settings[moduleNum].settingsDisplay = !this.state.moduleSettings[moduleNum].settingsDisplay
-    this.setState({moduleSettings: settings})
-  }
-
-  removeChatModule = (moduleNum) => {
-    let moduleSettings = [...this.state.moduleSettings]
-    moduleSettings.splice(moduleNum, 1)
-    // console.log(moduleSettings)
-    this.setState({twitchChatCount: this.state.twitchChatCount -1, moduleSettings: moduleSettings})
-  }
-
-  chatNameHandler = (moduleNum, event) => {
-    let updatedSettings = [...this.state.moduleSettings]
-    updatedSettings[moduleNum].moduleName = event.target.value
-    this.setState({moduleSettings: updatedSettings})
-  }
-
-  editNameToggler = (moduleNum) => {
-    let updatedNameSettings = [...this.state.moduleSettings]
-    updatedNameSettings[moduleNum].editModuleName = !this.state.moduleSettings[moduleNum].editModuleName
-    this.setState({moduleSettings: updatedNameSettings})
-  }
-
-  pauseStateChatModule = (moduleNum) => {
-    // console.log(this.state.twitchMessages)
-    let updatedPausedState = [...this.state.moduleSettings]
-    updatedPausedState[moduleNum].paused = !this.state.moduleSettings[moduleNum].paused
-    this.setState({moduleSettings: updatedPausedState})
-  }
 
   changeChannel = (newChannel) => {
-    
     socket.emit('leaveRoom')
-    socket.emit('join', {username: this.state.username, room: newChannel, profileImage: this.state.profileImage})
-    this.setState({twitchMessages: [], modMsgs: []})
+    socket.emit('join', {username: this.props.username, room: newChannel, profileImage: this.props.profileImage})
     
-      this.setState({currentChannel: newChannel}, ()=> {
+    //set global state of new channel
+    this.props.setCurrentChannel(newChannel)
 
-        if(!this.state.channelHistory.includes(newChannel)){
-          //set channel history for sockets
-          this.setState({channelHistory: [...this.state.channelHistory, newChannel]})
-          
-          socket.on(newChannel, (messageData)=>{
-            if(this.state.twitchMessages.length < 200){
-                this.setState({twitchMessages: [...this.state.twitchMessages, messageData]})
-            } else {
-                this.setState({twitchMessages: [...this.state.twitchMessages.slice(1), messageData]})
-            }
-          })
-        }
 
+    if(!this.props.channelHistory.includes(newChannel)){
+      //set channel history for sockets
+      this.props.addChannelHistory(newChannel)
+
+      //create current channel socket connection for twitch messages
+      socket.on(newChannel, (messageData)=>{
+        this.props.addTwitchMessage(messageData)
       })
+    }
 
-      apiCall.getEmotes(this.state.apiEndpoint, newChannel)
-      .then((channelEmotes)=>{
-        this.setState({channelEmotes: channelEmotes[0], channelEmoteCodes: channelEmotes[1], channelEmoteIDByName: channelEmotes[2]})
-      })
-
+    this.props.clearTwitchMessages()
+    this.props.clearModMsgs()
   }
 
-  // clicked = () => {
-  //   console.log(this.state.channelEmotes)
-  // }
 
   render(){
 
-    let chatModules = []
-
-    for(let i=0; i < this.state.twitchChatCount; i++){
-      chatModules.push(
-        <TwitchChatModule 
-          className={styles.twitchModule} 
-          key={this.state.twitchChatCount-i} 
-          id="twitchModule" 
-          moduleSettings={this.state.moduleSettings[i]} 
-          moduleNum={i} 
-          twitchMessages={this.state.twitchMessages}
-          updateSettings={this.updateSettings}
-          removeChatModule={this.removeChatModule}
-          settingsToggle={this.settingsToggle}
-          chatNameHandler={this.chatNameHandler}
-          editNameToggler={this.editNameToggler}
-          pauseStateChatModule={this.pauseStateChatModule}
-          currentChannel={this.state.currentChannel}
-        >
-        <TwitchChatContent 
-          twitchMessages={this.state.twitchMessages}
-          draggable="true" 
-          moduleSettings={this.state.moduleSettings[i]} 
-          moduleNum={i}
-          currentChannel={this.state.currentChannel}
-          emotes={this.state.channelEmotes}
-          emoteCodes={this.state.channelEmoteCodes}
-          emoteIDByName={this.state.channelEmoteIDByName}
-          username={this.state.username}
-        />
-        </TwitchChatModule>
-      )
-    }
-
-    let channelList = this.state.channelAccess.map((channelObject)=>{
+    let channelList = this.props.channelAccess.map((channelObject)=>{
       return(
       <div className={styles.profileImageContainer} key={channelObject.channel} onClick={()=>this.changeChannel(channelObject.channel)}>
-        <img className={(channelObject.channel === this.state.currentChannel ? styles.currentChannel : styles.channelImage)} src={channelObject.channelImage} alt="Channel"/>
+        <img className={(channelObject.channel === this.props.currentChannel ? styles.currentChannel : styles.channelImage)} src={channelObject.channelImage} alt="Channel"/>
+        <p className={styles.channelAccessName}>{channelObject.channel}</p>
       </div>
       )
     })
@@ -297,50 +119,66 @@ class Main extends Component {
 
     return (
       <div className={styles.application}>
+
+        {/* side nav */}
         <div className={styles.navbar}>
-          <div className={styles.buttonContainer}>
-            {/* <div onClick={this.clicked} className={styles.navButton}/> */}
-            <div className={styles.buttonSlot}>
-              <button onClick={this.toggleModChatModule} className={styles.navButton} style={this.state.modChatEnabled ? {opacity: '100%'} : {opacity: '50%'}}>
-                <img className={styles.modIcon} src={modIcon} alt="Mod Icon"/>
-              </button>
+          <div className={styles.navSpacer}></div>
+            <div className={styles.buttonContainer} style={this.state.activeTab === 'Dashboard' ? {width: '105%', backgroundColor: '#535353'} : {}}>
+              <div className={styles.navText}>Dashboard</div>
             </div>
-            <div className={styles.buttonSlot}>
-              <button onClick={this.addTwitchChatModule} className={styles.navButton} id={styles.addButton}>+</button>
-            </div>
-          </div>
           <div className={styles.modListContainer}>
             {channelList}
           </div>
-        </div>
-        
-        <div className={styles.chatModules}>
-          <ModChatModule 
-            className={styles.modModule} 
-            visibility={this.state.modChatEnabled} 
-            roomUsers={this.state.roomUsers}
-            onMessageSubmit={this.onMessageSubmit} 
-            usernameHandler={this.usernameHandler} 
-            inputChangedHandler={this.inputChangedHandler}
-            transferTwitchMsg={this.transferTwitchMsg}
-            id="modModule"
-            >
-            <ModChatContent 
-            modMsgs={this.state.modMsgs} 
-            username={this.state.username}
-            profileImage={this.state.profileImage}
-            currentChannel={this.state.currentChannel}
-            id="modCard"
-            draggable="true"
-            >
-            </ModChatContent>
-          </ModChatModule>
-          {chatModules}
-        </div>
+        </div>    
+
+        <ModuleContainer>
+          <Dashboard
+              key={this.props.currentChannel}
+              className={styles.modModule} 
+              apiEndpoint={this.state.apiEndpoint}
+          />
+        </ModuleContainer>
+                
         {backgroundMask}
       </div>
     );
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    currentChannel: state.applicationReducer.currentChannel,
+    username: state.applicationReducer.username,
+    twitchID: state.applicationReducer.twitchID,
+    profileImage: state.applicationReducer.profileImage,
+    channelAccess: state.applicationReducer.channelAccess,
+    channelHistory: state.applicationReducer.channelHistory
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //application
+    setUsername: (username) => dispatch({type: 'SET_USERNAME', payload: username}),
+    setLoginUsername: (login_username) => dispatch({type: 'SET_LOGIN_USERNAME', payload: login_username}),
+    setTwitchID: (twitchID) => dispatch({type: 'SET_TWITCH_ID', payload: twitchID}),
+    setProfileImage: (profileImage) => dispatch({type: 'SET_PROFILE_IMAGE', payload: profileImage}),
+    setChannelAccess: (channelAccess) => dispatch({type: 'SET_CHANNEL_ACCESS', payload: channelAccess}),
+    setModList: (modList) => dispatch({type: 'SET_MOD_LIST', payload: modList}),
+    setRoomUsers: (roomUsers) => dispatch({type: 'SET_ROOM_USERS', payload: roomUsers}),
+    setAccessToken: (accessToken) => dispatch({type: 'SET_ACCESS_TOKEN', payload: accessToken}),
+    setCurrentChannel: (channel) => dispatch({type: 'SET_CURRENT_CHANNEL', payload: channel}),
+    addChannelHistory: (newChannel) => dispatch({type: 'ADD_CHANNEL_HISTORY', payload: newChannel}),
+    //modChat
+    newModMsg: (modMsg) => dispatch({type: 'NEW_MOD_MSG', payload: modMsg}),
+    clearModMsgs: () => dispatch({type: 'CLEAR_MOD_MSGS'}),
+    //twitchChat
+    addTwitchMessage: (messageData) => dispatch({type: 'ADD_TWITCH_MESSAGE', payload: messageData}),
+    clearTwitchMessages: () => dispatch({type: 'CLEAR_TWITCH_MESSAGES'}),
+    addChannelEmotes: (emotes) => dispatch({type: 'ADD_CHANNEL_EMOTES', payload: emotes}),
+    addChannelEmoteCodes: (emoteCodes) => dispatch({type: 'ADD_CHANNEL_EMOTE_CODES', payload: emoteCodes}),
+    addChannelEmoteIDByName: (emoteIDByName) => dispatch({type: 'ADD_CHANNEL_EMOTE_ID_BY_NAME', payload: emoteIDByName})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

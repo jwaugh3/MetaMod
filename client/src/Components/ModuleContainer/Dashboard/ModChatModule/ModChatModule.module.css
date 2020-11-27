@@ -1,5 +1,5 @@
 .mainContainer {
-	height: 98vh;
+	height: 98%;
     width: 100%;
     overflow: hidden;
     max-width: 360px;
@@ -46,7 +46,6 @@
 .chatHeader {
     margin: 3px;
     color: white;
-    height: 3%;
     margin-left: 12px;
 }
 

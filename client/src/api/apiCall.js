@@ -1,4 +1,3 @@
-
 const getUserDetails = async (apiURL, twitchID) => {
     let userDetails = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/userData/' + twitchID)

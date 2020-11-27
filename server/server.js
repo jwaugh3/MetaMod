@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 const socket = require('./socket');
 const bot = require('./bot/bot');
+const modActions = require('./bot/modActions');
 const updateBot = require('./bot/updateBot');
 const { updateBttvGlobalEmotes } = require('./utils/emotes/bttv');
 const path = require('path')
