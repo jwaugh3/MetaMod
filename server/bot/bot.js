@@ -4,8 +4,7 @@ const { passChatMsg } = require('../socket');
 // Define configuration options
 const opts = {
     connection: {
-        reconnect: true,
-        secure: true
+        reconnect: true
     },
     identity: {
         username: "metamoderation",
