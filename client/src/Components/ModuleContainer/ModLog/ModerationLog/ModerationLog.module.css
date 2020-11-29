@@ -1,9 +1,9 @@
 .mainContainer {
 	height: 98%;
-    width: 600px;
+    width: 700px;
     overflow: hidden;
-    max-width: 600px;
-    min-width: 600px;
+    max-width: 700px;
+    min-width: 700px;
     margin: 10px 6px 6px 12px;
     position: relative;
     background-color: #525153;
@@ -16,9 +16,10 @@
     margin-right: 10px;
     border-bottom: 1px solid rgb(199, 198, 198);
     user-select: none;
+    margin-bottom: 8px;
 }
 
-.chatHeader {
+.logHeader {
     margin: 3px;
     color: white;
     margin-left: 12px;
