@@ -15,7 +15,7 @@ require('dotenv').config()
 //server setup
 const app = express();
 
-//cors setup
+//cors setup 
 app.use(cors({ origin: '*' }));
 app.use(function(req, res, next) {
 	// Website you wish to allow to connect
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
 //initialize cookie parser
 app.use(cookieParser(process.env.COOKIE_KEY));
 
-//connect to mongodb
+//connect to mongodb 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (res) => {
 	console.log('connected to mongodb');
 });

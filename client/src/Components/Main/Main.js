@@ -4,10 +4,13 @@ import queryString from 'querystring';
 //Components
 import Dashboard from '../ModuleContainer/Dashboard/Dashboard';
 import ModuleContainer from '../ModuleContainer/ModuleContainer';
+import NavButton from './NavButton/NavButton';
+import ModLog from '../ModuleContainer/ModLog/ModLog';
 //Styles
 import styles from './Main.module.scss';
 //Resources
 import socket from '../../socket';
+import logo from '../../resources/Logo.png';
 //State Management
 import { connect } from 'react-redux';
 
@@ -98,6 +101,10 @@ class Main extends Component {
     this.props.clearModMsgs()
   }
 
+  switchComponent = (newComponent) => {
+    this.setState({activeTab: newComponent})
+  }
+
 
   render(){
 
@@ -117,26 +124,37 @@ class Main extends Component {
       backgroundMask[key] = <div className={styles.star} key={key}>+</div>
     }
 
+    //render current module
+    let renderedModule = () => {
+      switch(this.state.activeTab) {
+        case "Dashboard":  return <Dashboard apiEndpoint={this.state.apiEndpoint} /> 
+        case "ModLog":  return <ModLog/>
+        default:  return <h1>Uh oh, something went wrong. Contact the Dev!</h1>
+      }
+    }
+
     return (
       <div className={styles.application}>
 
         {/* side nav */}
         <div className={styles.navbar}>
-          <div className={styles.navSpacer}></div>
-            <div className={styles.buttonContainer} style={this.state.activeTab === 'Dashboard' ? {width: '105%', backgroundColor: '#535353'} : {}}>
-              <div className={styles.navText}>Dashboard</div>
+          <div className={styles.logoContainer}>
+            <div className={styles.logoSubContainer} onClick={()=>window.location = 'home'}>
+                <img src={logo} className={styles.logo} alt="logo"/>
+                <div className={styles.textContainer}>
+                    <h1 className={styles.logoText}>MetaMod</h1>
+                </div>
             </div>
+          </div>
+            <NavButton title={'Dashboard'} activeTab={this.state.activeTab} switchComponent={this.switchComponent}/>
+            <NavButton title={'ModLog'} activeTab={this.state.activeTab} switchComponent={this.switchComponent}/>
           <div className={styles.modListContainer}>
             {channelList}
           </div>
         </div>    
 
         <ModuleContainer>
-          <Dashboard
-              key={this.props.currentChannel}
-              className={styles.modModule} 
-              apiEndpoint={this.state.apiEndpoint}
-          />
+          {renderedModule()}
         </ModuleContainer>
                 
         {backgroundMask}

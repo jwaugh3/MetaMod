@@ -88,7 +88,7 @@ class Dashboard extends Component {
             {/* Modules */}
             <div className={styles.chatModules}>
 
-              <ModChatModule className={styles.modModule} onMessageSubmit={this.onMessageSubmit} inputChangedHandler={this.inputChangedHandler} transferTwitchMsg={this.transferTwitchMsg} id="modModule">
+              <ModChatModule onMessageSubmit={this.onMessageSubmit} inputChangedHandler={this.inputChangedHandler} transferTwitchMsg={this.transferTwitchMsg} id="modModule">
                   <ModChatContent id="modCard" draggable="true"/>
               </ModChatModule>
 

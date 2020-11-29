@@ -92,24 +92,56 @@
 	overflow: hidden;
 }
 
-.navSpacer {
-	width: 100%;
-	height: 70px;
+.logoContainer {
+    width: 100%;
+    height: 70px; 
+    position: relative;
 }
 
-.buttonContainer {
-	width: 100%;
-	height: 42px;
-	margin-left: 0px;
-	background:#606060;
-	border-radius: 0px 4px 4px 0px;
+.logoSubContainer {
+    display: inline;
+    position: absolute;
+	margin: auto;
+	width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 32%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: -5px;
 }
 
-.navText {
-	padding: 11px;
-	float: right;
-	color: white;
-	font-family: 'Roboto';
-	font-weight: 300;
-	user-select: none;
+.logoText {
+    font-family: 'Roboto';
+    font-weight: 300;
+	font-size: 18px;
+	display: inline;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    margin: auto;
+}
+
+.logoText:hover {
+	color: #05A1E5;
+	text-shadow: 1px 1px 2px #000000;
+}
+
+.logo {
+    width: 25px;
+    margin: auto;
+    margin-bottom: 0px;
+}
+
+.textContainer {
+    width: 140px;
+    margin-top: 8px;
+}
+
+.navOptionsContainer {
+    width: 70%;
+    margin: auto;
+    height: 30%;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }

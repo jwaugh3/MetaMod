@@ -1,0 +1,16 @@
+.buttonContainer {
+	width: 100%;
+	height: 42px;
+	margin-left: 0px;
+	background:#606060;
+	border-radius: 0px 4px 4px 0px;
+}
+
+.navText {
+	padding: 11px;
+	float: right;
+	color: white;
+	font-family: 'Roboto';
+	font-weight: 300;
+	user-select: none;
+}
