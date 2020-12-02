@@ -10,7 +10,7 @@ import Login from './Components/Site/Login/Login';
 import Policy from './Components/Site/Policy/Policy';
 import Main from './Components/Main/Main';
 //Styles
-import styles from './App.module.css';
+import styles from './App.module.scss';
 //Assets
 
 

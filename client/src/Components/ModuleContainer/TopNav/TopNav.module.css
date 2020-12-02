@@ -8,9 +8,8 @@
 }
 
 .topNavButtonContainer {
-	display: grid;
-	grid-template-columns: repeat(8, 50px);
-	grid-gap: 5px;
+	height: 44px;
 	margin: 8px;
+	margin-left: 12px;
 }
 

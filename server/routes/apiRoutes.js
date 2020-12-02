@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const request = require('request');
-const { User, ChannelAccess, BttvEmote, FfzEmote } = require('../models/dbModels');
+const { User, ChannelAccess, BttvEmote, FfzEmote, ModerationRecord } = require('../models/dbModels');
 const { client } = require('../bot/bot');
 
 router.get('/userData/:id', (req, res)=>{
@@ -72,5 +71,18 @@ router.get('/getFfzEmotes/:channel', (req, res) => {
         }
     })
 }) 
+
+router.get('/getModRecords/:channel', (req, res) => {
+    //get all mod logs for channel without mongo id
+    ModerationRecord.find({channel: '#' + req.params.channel}, { _id: 0 })
+    .then((results)=>{
+        if(results.length === 0){
+            res.json(null)
+        } else {
+            let records = results
+            res.json(records)
+        }
+    })
+})
 
 module.exports = router;  

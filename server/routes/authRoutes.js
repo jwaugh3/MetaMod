@@ -88,7 +88,8 @@ router.get('/redirected', (req, res) => {
 	request(options, (err, result, body) => {
 		let bodyObject = JSON.parse(body)
 		var accessToken = bodyObject.access_token
-        var refreshToken = bodyObject.refresh_token;
+		var refreshToken = bodyObject.refresh_token;
+		console.log(accessToken)
 
 		var headers = {
 			'Authorization': 'Bearer ' + accessToken,
@@ -118,6 +119,11 @@ router.get('/redirected', (req, res) => {
 					updateBttvChannelEmotes(existingUser.twitch_ID, existingUser.login_username)
 					updateFfzChannelEmotes(existingUser.twitch_ID, existingUser.login_username)
 
+					User.findOneAndUpdate({twitch_ID}, {last_sign_in: new Date()}, {new: true, useFindAndModify: false})
+					.then((res)=>{
+						console.log(res)
+					})
+
 					// console.log('encrypt the following');
 					res.cookie('MM01', encryptUserToken(existingUser.user_token), {
 						maxAge: 345 * 24 * 60 * 60 * 1000,
@@ -135,7 +141,8 @@ router.get('/redirected', (req, res) => {
 						profile_image: userObject[0].profile_image_url,
 						email: userObject[0].email,
 						user_token: generateUserToken(),
-						refresh_token: refreshToken
+						refresh_token: refreshToken,
+						last_sign_in: new Date()
 					})
 						.save() 
 						.then((newUser) => {

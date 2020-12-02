@@ -10,11 +10,13 @@ import { Provider } from 'react-redux';
 import applicationReducer from './store/reducers/application';
 import modChatReducer from './store/reducers/modChat';
 import twitchChatReducer from './store/reducers/twitchChat';
+import modLogsReducer from './store/reducers/modLog';
 
 const rootReducer = combineReducers({
   applicationReducer,
   modChatReducer,
-  twitchChatReducer
+  twitchChatReducer,
+  modLogsReducer
 })
 
 const store = createStore(rootReducer);

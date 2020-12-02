@@ -68,7 +68,7 @@ class Main extends Component {
       this.props.newModMsg(modMsg)
     })
 
-    apiCall.getEmotes(this.state.apiEndpoint, this.props.currentChannel)
+    await apiCall.getEmotes(this.state.apiEndpoint, this.props.currentChannel)
         .then((channelEmotes)=>{
           this.props.addChannelEmotes(channelEmotes[0])
           this.props.addChannelEmoteCodes(channelEmotes[1])
@@ -128,7 +128,7 @@ class Main extends Component {
     let renderedModule = () => {
       switch(this.state.activeTab) {
         case "Dashboard":  return <Dashboard apiEndpoint={this.state.apiEndpoint} /> 
-        case "ModLog":  return <ModLog/>
+        case "ModLog":  return <ModLog apiEndpoint={this.state.apiEndpoint}/>
         default:  return <h1>Uh oh, something went wrong. Contact the Dev!</h1>
       }
     }

@@ -72,8 +72,48 @@
 }
 
 .recordAction {
-    width: 300px;
+    width: 316px;
     margin: auto;
     color: #E9E9E9;
     max-height: 68px;
+}
+
+.logContainer {
+    height: 43px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.logContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.logContainer::-webkit-scrollbar-thumb {
+    background-color:#222222;
+    border-radius: 8px;
+}
+
+.viewer {
+    color:  #ffffff;
+    display: inline;
+}
+
+.actionText {
+    color: rgb(212, 139, 139);
+    display: inline;
+}
+
+.duration {
+    color: rgb(255, 201, 136);
+    display: inline;
+}
+
+.statusTrue {
+    color: rgb(149, 252, 149);
+    display: inline;
+}
+
+.statusFalse {
+    color:  rgb(212, 139, 139);
+    display: inline;
 }

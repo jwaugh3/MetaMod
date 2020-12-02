@@ -86,8 +86,27 @@ const getEmotes = async (apiURL, channel) => {
     return [cleanEmotes, cleanEmoteCodes, emoteIDByName]
 }
 
+const getModRecords = async (apiURL, channel) => {
+
+    let modRecords = new Promise((resolve, reject)=>{
+        fetch(apiURL + '/api/getModRecords/' + channel)
+        .then((data)=>{
+            data.json()
+            .then((res)=>{
+                resolve(res)
+            })
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    })
+    
+    return modRecords
+}
+
 export default {
     getUserDetails,
     getMods,
-    getEmotes
+    getEmotes,
+    getModRecords
 }

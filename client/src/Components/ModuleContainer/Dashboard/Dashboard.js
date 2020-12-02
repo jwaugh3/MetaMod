@@ -10,7 +10,8 @@ import Auxiliary from '../../../hoc/Auxiliary';
 //Styles
 import styles from './Dashboard.module.scss';
 //Assets
-import modIcon from '../../../resources/modIcon.png';
+import modIcon from '../../../resources/modButton.png';
+import twitchChatIcon from '../../../resources/twitchChatButton.png';
 //Resources
 import socket from '../../../socket';
 //State Management
@@ -71,17 +72,18 @@ class Dashboard extends Component {
             {/* top navigation */}
             <TopNav>
               <div className={styles.buttonSlot}>
-                <button onClick={()=>this.props.toggleModChatModule(!this.props.modChatEnabled)} className={styles.navButton} style={this.props.modChatEnabled ? {opacity: '100%'} : {opacity: '50%'}}>
-                    <img className={styles.modIcon} src={modIcon} alt="Mod Icon"/>
-                </button>
+                <img src={modIcon} alt="Mod Icon" onClick={()=>this.props.toggleModChatModule(!this.props.modChatEnabled)} className={styles.navButton} style={this.props.modChatEnabled ? {opacity: '100%'} : {opacity: '50%'}}>
+                </img>
               </div>
               
               <div className={styles.buttonSlot}>
-                  <button onClick={()=>{
+                  <img onClick={()=>{
                       this.props.increaseModuleCount(this.props.twitchChatCount)
                       this.props.addTwitchModuleSettings()
                     }} 
-                    className={styles.navButton} id={styles.addButton}>+</button>
+                    src={twitchChatIcon}
+                    className={styles.navButton} id={styles.addButton}>
+                    </img>
               </div>
             </TopNav>
 
