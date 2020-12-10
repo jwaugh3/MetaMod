@@ -110,7 +110,6 @@ const reducer = (state = initialState, action) => {
         case actionTypes.PAUSE_CHAT_MODULE:
             let updatedPausedState = [...state.moduleSettings]
             updatedPausedState[action.payload.moduleNum].paused = action.payload.status
-            console.log('paused')
             return {
                 ...state,
                 moduleSettings: updatedPausedState
@@ -119,7 +118,6 @@ const reducer = (state = initialState, action) => {
     //-------------------------chat filter settings
         //update visibility of commands for specific module
         case actionTypes.UPDATE_FILTER_COMMANDS:
-            console.log(action.payload)
             let commandSettings = [...state.moduleSettings]
             commandSettings[action.payload.moduleNum].commands = !action.payload.status
             return {
@@ -161,8 +159,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 moduleSettings: modMsgsSettings
             }
+        default:
+            return {
+                ...state
+            }
     }
-    return state
 }
 
 export default reducer

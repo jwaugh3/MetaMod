@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import apiCall from '../../api/apiCall';
 import queryString from 'querystring';
+import { getCustomRewardHandler } from '../ModuleContainer/ChannelPoints/customRewardHandler';
+// import { getRewardRedemptions } from '../../api/apiCall';
 //Components
-import Dashboard from '../ModuleContainer/Dashboard/Dashboard';
 import ModuleContainer from '../ModuleContainer/ModuleContainer';
 import NavButton from './NavButton/NavButton';
+import Dashboard from '../ModuleContainer/Dashboard/Dashboard';
+import ChannelPoints from '../ModuleContainer/ChannelPoints/ChannelPoints';
 import ModLog from '../ModuleContainer/ModLog/ModLog';
 //Styles
 import styles from './Main.module.scss';
@@ -20,7 +23,6 @@ class Main extends Component {
     inProduction: true,
     url: '',
     apiEndpoint: '',
-    activeTab: 'Dashboard'
   }
   
   componentDidMount = async () => {
@@ -75,16 +77,30 @@ class Main extends Component {
           this.props.addChannelEmoteIDByName(channelEmotes[2])
         })
 
+    let rewardVerification = getCustomRewardHandler(this.state.apiEndpoint, this.props.currentChannel, this.props.createReward)
+    if(rewardVerification === true){
+      this.props.setChannelPointsReceived(true)
+    }
+
   }
 
 
 
-  changeChannel = (newChannel) => {
+  changeChannel = async (newChannel) => {
+    this.props.setActiveTab('Dashboard')
+    this.props.setChannelPointsReceived(false)
+
+    if(this.props.currentChannel !== newChannel){
+      this.props.clearTwitchMessages()
+      this.props.clearModMsgs()
+      this.props.clearRewards()
+    }
+
     socket.emit('leaveRoom')
     socket.emit('join', {username: this.props.username, room: newChannel, profileImage: this.props.profileImage})
     
     //set global state of new channel
-    this.props.setCurrentChannel(newChannel)
+    await this.props.setCurrentChannel(newChannel)
 
 
     if(!this.props.channelHistory.includes(newChannel)){
@@ -96,13 +112,13 @@ class Main extends Component {
         this.props.addTwitchMessage(messageData)
       })
     }
+    
+    let rewardVerification = await getCustomRewardHandler(this.state.apiEndpoint, this.props.currentChannel, this.props.createReward)
+    if(rewardVerification === true){
+      this.props.setChannelPointsReceived(true)
+    }
 
-    this.props.clearTwitchMessages()
-    this.props.clearModMsgs()
-  }
-
-  switchComponent = (newComponent) => {
-    this.setState({activeTab: newComponent})
+    // await getRewardRedemptions(this.state.apiEndpoint, this.props.currentChannel, 'addc1063-3caa-4d8c-9b77-5264fe1cc7d8')  
   }
 
 
@@ -126,8 +142,9 @@ class Main extends Component {
 
     //render current module
     let renderedModule = () => {
-      switch(this.state.activeTab) {
+      switch(this.props.activeTab) {
         case "Dashboard":  return <Dashboard apiEndpoint={this.state.apiEndpoint} /> 
+        case "Channel Points": return <ChannelPoints apiEndpoint={this.state.apiEndpoint}/>
         case "ModLog":  return <ModLog apiEndpoint={this.state.apiEndpoint}/>
         default:  return <h1>Uh oh, something went wrong. Contact the Dev!</h1>
       }
@@ -146,8 +163,9 @@ class Main extends Component {
                 </div>
             </div>
           </div>
-            <NavButton title={'Dashboard'} activeTab={this.state.activeTab} switchComponent={this.switchComponent}/>
-            <NavButton title={'ModLog'} activeTab={this.state.activeTab} switchComponent={this.switchComponent}/>
+            <NavButton title={'Dashboard'}/>
+            <NavButton title={'Channel Points'}/>
+            <NavButton title={'ModLog'}/>
           <div className={styles.modListContainer}>
             {channelList}
           </div>
@@ -170,7 +188,8 @@ const mapStateToProps = (state) => {
     twitchID: state.applicationReducer.twitchID,
     profileImage: state.applicationReducer.profileImage,
     channelAccess: state.applicationReducer.channelAccess,
-    channelHistory: state.applicationReducer.channelHistory
+    channelHistory: state.applicationReducer.channelHistory,
+    activeTab: state.applicationReducer.activeTab
   }
 }
 
@@ -187,6 +206,8 @@ const mapDispatchToProps = (dispatch) => {
     setAccessToken: (accessToken) => dispatch({type: 'SET_ACCESS_TOKEN', payload: accessToken}),
     setCurrentChannel: (channel) => dispatch({type: 'SET_CURRENT_CHANNEL', payload: channel}),
     addChannelHistory: (newChannel) => dispatch({type: 'ADD_CHANNEL_HISTORY', payload: newChannel}),
+    setActiveTab: (newTab) => dispatch({type: 'SET_ACTIVE_TAB', payload: newTab}),
+    setChannelPointsReceived: (newStatus) => dispatch({type: 'SET_CHANNEL_POINTS_RECEIVED', payload: newStatus}),
     //modChat
     newModMsg: (modMsg) => dispatch({type: 'NEW_MOD_MSG', payload: modMsg}),
     clearModMsgs: () => dispatch({type: 'CLEAR_MOD_MSGS'}),
@@ -195,7 +216,10 @@ const mapDispatchToProps = (dispatch) => {
     clearTwitchMessages: () => dispatch({type: 'CLEAR_TWITCH_MESSAGES'}),
     addChannelEmotes: (emotes) => dispatch({type: 'ADD_CHANNEL_EMOTES', payload: emotes}),
     addChannelEmoteCodes: (emoteCodes) => dispatch({type: 'ADD_CHANNEL_EMOTE_CODES', payload: emoteCodes}),
-    addChannelEmoteIDByName: (emoteIDByName) => dispatch({type: 'ADD_CHANNEL_EMOTE_ID_BY_NAME', payload: emoteIDByName})
+    addChannelEmoteIDByName: (emoteIDByName) => dispatch({type: 'ADD_CHANNEL_EMOTE_ID_BY_NAME', payload: emoteIDByName}),
+    //channelPoint
+    createReward: (rewardData) => dispatch({type: 'CREATE_REWARD', payload: rewardData}),
+    clearRewards: () => dispatch({type: 'CLEAR_REWARDS'})
   }
 }
 

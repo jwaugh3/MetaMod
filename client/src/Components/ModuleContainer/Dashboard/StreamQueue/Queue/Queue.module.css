@@ -1,0 +1,48 @@
+.queueContainer {
+    width: 92%;
+    margin: 15px;
+    display: grid;
+    grid-template-columns: 8% 92%;
+    min-height: 25px;
+}
+
+.queueCheckContainer {
+    margin: 5px;
+    width: 100%;
+    height: fit-content;
+}
+
+.statusIcon {
+    width: 24px;
+    height: 24px;
+    margin-top: 4px;
+}
+
+.queueMessageContainer {
+    width: 95%;
+    background-color: #2C2E33;
+    max-height: 90px;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px #000000;
+    overflow-y: auto;
+}
+
+.queueMessageContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.queueMessageContainer::-webkit-scrollbar-thumb {
+    background-color:#222222;
+    border-radius: 8px;
+}
+
+.queueMessage {
+    margin: 5px;
+}
+
+.queueText {
+    margin: 0px;
+    color: rgb(197, 197, 197);
+}

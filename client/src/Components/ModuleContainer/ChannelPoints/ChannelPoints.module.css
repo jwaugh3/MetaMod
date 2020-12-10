@@ -1,0 +1,31 @@
+.channelPointsModule {
+    display: flex;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.createButton {
+	position: relative;
+	top: 5px;
+	width: 180px;
+	height: 34px;
+	color: white;
+	background-color: #05A1E5;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0px 2px 5px black;
+	margin: auto;
+}
+
+.cancelButton {
+	position: relative;
+	top: 5px;
+	width: 180px;
+	height: 34px;
+	color: white;
+	background-color: #D48B8B;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0px 2px 5px black;
+	margin: auto;
+}

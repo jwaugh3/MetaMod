@@ -4,8 +4,8 @@ import apiCall from '../../../api/apiCall';
 import Auxiliary from '../../../hoc/Auxiliary';
 import TopNav from '../TopNav/TopNav'
 import ModerationLog from './ModerationLog/ModerationLog';
-import Loading from '../../Loading/Loading';
-import Dropdown from '../TopNav/Dropdown/Dropdown';
+import Loading from '../../AssetComponents/Loading/Loading';
+import Dropdown from '../../AssetComponents/Dropdown/Dropdown';
 //Styles
 import styles from './ModLog.module.css';
 //State Management
@@ -53,7 +53,7 @@ class ModLog extends Component {
     
                         //set filter options
                         const unique = [...new Set(response.map(item => item.mod))];
-                        this.setState({options: unique}, ()=>{
+                        this.setState({options: unique, filter: unique}, ()=>{
                             console.log(this.state.options)
                         })
                     }

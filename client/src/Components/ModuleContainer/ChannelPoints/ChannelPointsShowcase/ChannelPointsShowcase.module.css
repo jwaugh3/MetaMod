@@ -1,0 +1,119 @@
+.showcaseContainer {
+    width: 630px;
+    height: 98%;
+    background-color: #2C2E33;
+    margin: 12px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
+    overflow: hidden;
+    position: relative;
+}
+
+.headerContainer {
+    height: 32px;
+    width: 610px;
+    margin: 12px;
+    margin-top: 0px;
+    border-bottom: white 1px solid;
+}
+
+.headerText {
+    color: white;
+    height: 28px;
+    margin: 3px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.channelPointsAlert {
+    color: #D48B8B;
+    float: right;
+    font-size: 15px;
+    margin: auto;
+}
+
+.rewardScrollContainer {
+    margin-right: 10px;
+    height: 94%;
+    overflow-y: auto;
+}
+
+.rewardScrollContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.rewardScrollContainer::-webkit-scrollbar-thumb {
+    background-color:#222222;
+    border-radius: 8px;
+}
+
+.presetContainer {
+    width: 574px;
+    min-height: 50px;
+    margin: 7px auto 7px auto;
+}
+
+.presetHeader {
+    width: 60%;
+    margin-left: 0px;
+    color: #8E8E8E;
+    font-size: 16px;
+    border-bottom: #8E8E8E 1px solid;
+}
+
+.rewardContainer {
+    margin: auto;
+    width: 560px;
+    margin-left: 15px;
+    min-height: 50px;
+}
+
+.customContainer {
+    width: 574px;
+    margin: 18px auto 7px auto;
+}
+
+.customHeader {
+    width: 60%;
+    margin-left: 0px;
+    color: #8E8E8E;
+    font-size: 16px;
+    border-bottom: #8E8E8E 1px solid;
+    display: inline;
+}
+
+.channelPointLink {
+    display: flex;
+    float: right;
+    margin-right: 26px;
+    height: 20px;
+    color: #8E8E8E;
+}
+
+.channelPointLink:hover {
+    color: white;
+}
+
+.channelPointText {
+    font-size: 14px;
+    margin-top: 1px;
+    margin-right: 4px;
+}
+
+.externalLinkIcon {
+    z-index: 9;
+}
+
+.svg {
+    display: flex;
+    float: right;
+}
+
+.noRecords {
+    margin: auto;
+    margin-top: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}

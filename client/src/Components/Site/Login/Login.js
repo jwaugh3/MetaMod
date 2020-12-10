@@ -38,7 +38,7 @@ class Login extends Component {
 							{backendLink}
 						</div>
 						<div className={styles.accept}>
-							<label>By logging in, you accept the <a onClick={()=>window.location = '/policy'} className={styles.policyLink}>Terms and Conditions and Privacy Policy</a></label>
+							<label>By logging in, you accept the <a href="https://metamoderation.com/policy" className={styles.policyLink}>Terms and Conditions and Privacy Policy</a></label>
 						</div>
 					</div>
 				</div>

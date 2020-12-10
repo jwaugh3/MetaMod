@@ -17,9 +17,9 @@ class ModRecord extends Component {
         } else if(this.props.action === 'emoteonly'){
             recordOutput = <div>emote only {this.props.status === true ? <p className={styles.statusTrue}>enabled</p> : <p className={styles.statusFalse}>disabled</p>}</div>
         } else if(this.props.action === 'followersonly'){
-            recordOutput = <div>followers only {this.props.status == true ? <p className={styles.statusTrue}>enabled</p> : <p className={styles.statusFalse}>disabled</p>} (<p className={styles.duration}>{this.props.duration}s</p>)</div>
+            recordOutput = <div>followers only {this.props.status === true ? <p className={styles.statusTrue}>enabled</p> : <p className={styles.statusFalse}>disabled</p>} (<p className={styles.duration}>{this.props.duration}s</p>)</div>
         } else if(this.props.action === 'slowmode'){
-            recordOutput = <div>slowmode {this.props.status == true ? <p className={styles.statusTrue}>enabled</p> : <p className={styles.statusFalse}>disabled</p>} (<p className={styles.duration}>{this.props.duration}s</p>)</div>
+            recordOutput = <div>slowmode {this.props.status === true ? <p className={styles.statusTrue}>enabled</p> : <p className={styles.statusFalse}>disabled</p>} (<p className={styles.duration}>{this.props.duration}s</p>)</div>
         }
 
 

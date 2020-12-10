@@ -80,6 +80,8 @@ class ModChatContent extends Component {
                         <div className={styles.horzLine}></div>
                     </div>
                 )
+            } else {
+                return null
             }
         })
 

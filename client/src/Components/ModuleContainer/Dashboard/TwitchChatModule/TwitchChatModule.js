@@ -58,7 +58,7 @@ class TwitchChatModule extends Component {
 
         return ( 
             <div className={styles.mainContainer}>
-                <div className={styles.headerContainer}draggable='false'>
+                <div className={styles.headerContainer}>
                     <h3 className={styles.chatHeader}>Twitch Chat -</h3>
                     {this.props.moduleSettings[this.props.moduleNum].editModuleName ? 
                         <div className={styles.customHeaderContainer}>

@@ -11,12 +11,14 @@ import applicationReducer from './store/reducers/application';
 import modChatReducer from './store/reducers/modChat';
 import twitchChatReducer from './store/reducers/twitchChat';
 import modLogsReducer from './store/reducers/modLog';
+import channelPointReducer from './store/reducers/channelPoint';
 
 const rootReducer = combineReducers({
   applicationReducer,
   modChatReducer,
   twitchChatReducer,
-  modLogsReducer
+  modLogsReducer,
+  channelPointReducer
 })
 
 const store = createStore(rootReducer);

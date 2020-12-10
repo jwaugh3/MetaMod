@@ -1,0 +1,216 @@
+/* CONTAINER MANAGEMENT */
+.formContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.form {
+    margin: 18px;
+}
+
+.formGrid {
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.formSpacer {
+    height: 13px;
+    width: 100%;
+}
+
+/* HEADER */
+.headerContainer {
+    height: 32px;
+    width: 330px;
+    margin: 12px;
+    margin-top: 0px;
+    border-bottom: white 1px solid;
+}
+
+.headerText {
+    color: white;
+    height: 28px;
+    margin: 3px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+/* GENERAL FORM */
+label {
+    color: white;
+}
+
+input[type=text] {
+    background-color: #6D6C6D;
+    height: 24px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    margin-top: 2px;
+}
+
+textarea {
+    background-color: #6D6C6D;
+    height: 75px;
+    width: 330px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    margin-top: 2px;
+    resize: none;
+}
+
+.inputBox {
+    width: 230px;
+}
+
+/* NAME */
+label[id=charCount] {
+    color: rgb(175, 174, 174);
+    margin-left: 5px;
+}
+
+/* DESCRIPTION */
+label[id=descCharCount] {
+    color: rgb(175, 174, 174);
+    margin-left: 136px;
+}
+
+label[id=optional] {
+    color: rgb(167, 166, 166);
+    margin-left: 4px;
+    width: 50px;
+}
+
+/* COST FORM */
+.costInput {
+    width: 130px;
+    display: block;
+}
+
+
+
+/* COLOR SELECT */
+.colorSelectContainer {
+    position: relative;
+}
+
+.colorContainer {
+    width: 80px;
+    height: 26px;
+    border-radius: 6px;
+    margin-top: 2px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.editButton {
+    width: 26px;
+    height: 26px;
+    background-color: #6D6C6D;
+    float: right;
+    border-radius: 6px;
+}
+
+.editIcon {
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    margin-left: 5px;
+}
+
+.colorPicker {
+    right: 50px;
+    top: 10px;
+    z-index: 10;
+}
+
+.customColor {
+    position: absolute;
+    width: 170px;
+    height: 26px;
+    right: 45px;
+    top: 278px;
+    border-radius: 6px;
+    color: white;
+    text-align: center;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chromeColorPicker {
+    position: absolute;
+    right: -80px;
+    top: 45px;
+    margin-right: 100px;
+    z-index: 10;
+}
+
+.offClick {
+    width: 360px;
+    height: 600px;
+    z-index: 2;
+    position: absolute;
+}
+
+// TOGGLE SWITCHES
+.userSelect {
+    cursor: pointer;
+    user-select: none;
+}
+
+
+// COOLDOWN CONTAINER
+.cooldownContainer {
+    width: 300;
+    padding: 15px;
+    height: 180px;
+    background-color: #2C2E33;
+    border-radius: 10px;
+}
+
+.cooldownInput {
+    width: 140px;
+}
+
+.optionGrid {
+    width: 100%;
+    height: 30px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.cooldownOption {
+    margin-top: 10px;
+}
+
+.saveButton {
+    width: 94px;
+    height: 26px;
+    margin: 5px;
+    margin-top: 8px;
+    text-align: center;
+    float: right;
+    color: white;
+    background-color: #05A1E5;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px black;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.alert {
+    color: #D48B8B;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}

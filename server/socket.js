@@ -7,8 +7,7 @@ const {
   } = require('./utils/roomUsers/roomManagement');
 const express = require('express');
 const app = express();
-//const cors = require('cors');
-//app.use(cors({ origin: process.env.FRONT_END_URL }));
+
 app.use(function(req, res, next) {
         // Website you wish to allow to connect
         res.header('Access-Control-Allow-Origin', "https://metamoderation.com" );
@@ -30,8 +29,6 @@ const io = require('socket.io')(http, {
 });
 
 require('dotenv').config()
-
-//io.set('origins', process.env.FRONT_END_URL);
 
 //send twitch chat to client
 const passChatMsg = (msgData) => {

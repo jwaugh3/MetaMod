@@ -8,12 +8,15 @@ const reducer = (state = initialState, action) => {
 
     switch(action.type){
         case actionTypes.SET_MOD_LOGS:
-            console.log(action.payload)
             return {
+                ...state,
                 modLogs: action.payload
             }
+        default:
+            return {
+                ...state
+            }
     }
-    return state
 }
 
 export default reducer

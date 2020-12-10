@@ -22,10 +22,10 @@ router.get('/login', (req, res) => {
 	res.redirect(
 		'https://id.twitch.tv/oauth2/authorize?' +
 			queryString.stringify({
-				client_id: process.env.TWITCH_CLIENT_ID,
+				client_id: process.env.TWITCH_CLIENT_ID, 
                 redirect_uri: REDIRECT_URI,
                 response_type: 'code',
-				scope: 'user:read:email moderation:read channel:moderate',
+				scope: 'user:read:email moderation:read channel:moderate channel:manage:redemptions channel:read:redemptions',
                 state: process.env.TWITCH_AUTH_STATE
 			})
 	);
@@ -197,7 +197,7 @@ generateNewAccessToken = async (refreshToken) => {
 			if (err) {
 				reject(err);
 			} else {
-				console.log(body)
+				// console.log(body)
 				resolve(body);
 			}
 		});
@@ -222,4 +222,7 @@ decryptUserToken = (encryptedToken) => {
 
 
 
-module.exports = router;
+module.exports = {
+	authRoutes: router,
+	generateNewAccessToken
+}

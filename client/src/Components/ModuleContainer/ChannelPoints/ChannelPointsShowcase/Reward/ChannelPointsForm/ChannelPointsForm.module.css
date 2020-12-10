@@ -1,0 +1,17 @@
+.moduleContainer {
+    width: 360px;
+    position: absolute;
+    top: 10px;
+    left: 18%;
+    z-index: 12;
+}
+
+.formContainer {
+    width: 100%;
+    background-color: #484B53;
+    margin: 12px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
+    overflow: hidden;
+    padding-bottom: 10px;
+}

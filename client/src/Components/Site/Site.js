@@ -17,7 +17,7 @@ class Site extends Component {
                 <div className={styles.homePageContainer}>
                     {this.props.children}
                     <div>
-                        <p className={styles.policyLink}><a onClick={()=>window.location = '/policy'}>Review our Policies</a></p>
+                        <p className={styles.policyLink}><a href="https://metamoderation.com/policy">Review our Policies</a></p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,43 @@
+.mainContainer {
+	height: 98%;
+    width: 100%;
+    overflow: hidden;
+    max-width: 360px;
+    min-width: 360px;
+    margin: 10px 6px 6px 6px;
+    position: relative;
+    background-color: #525153;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.754);
+}
+
+.headerContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+    user-select: none;
+    grid-template-columns: 1.3fr 2fr;
+    border-bottom: 1px solid rgb(199, 198, 198);
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.chatHeader {
+    margin: 3px;
+    color: white;
+    margin-left: 12px;
+    display: inline;
+}
+
+.filterButton {
+    width: 40px;
+    height: 26px;
+    display: inline;
+    float: right;
+    cursor: pointer;
+    user-select: none;
+}
+
+.queueContainer {
+    width: 100%;
+    height: fit-content;
+}

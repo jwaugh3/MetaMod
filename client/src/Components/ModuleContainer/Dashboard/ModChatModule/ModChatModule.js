@@ -21,10 +21,9 @@ class ModChatModule extends Component {
     drop = (event) =>{
         event.preventDefault();
         const data = event.dataTransfer.getData('transfer')
-        // console.log(data)
+        
         if(data.includes('twitchCard')){
             let nodeCopy = document.getElementById(data).cloneNode(true)
-            // console.log(nodeCopy)
             let copiedDiv = nodeCopy.innerHTML
             
             this.props.transferTwitchMsg(copiedDiv)

@@ -11,7 +11,6 @@ import Policy from './Components/Site/Policy/Policy';
 import Main from './Components/Main/Main';
 //Styles
 import styles from './App.module.scss';
-//Assets
 
 
 class App extends Component {
@@ -39,7 +38,6 @@ class App extends Component {
 
   render() {
 
-    let inProduction = this.checkProduction(window.location.host)[0]
     let url = this.checkProduction(window.location.host)[1]
     var apiEndpoint = this.checkProduction(window.location.host)[2]
 

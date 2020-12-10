@@ -30,6 +30,8 @@ export class ModerationLog extends Component {
                         case 'slowmode': return <ModRecord key={key} modUsername={record.mod} viewer={record.event.username} time={moment.utc(record.timestamp).startOf().fromNow()} action={record.type} duration={record.event.duration} status={record.event.status} deletedMessage={null}/>
                         default: return <div>No records to display.</div>
                     }
+                } else {
+                    return null
                 }
             })
         }

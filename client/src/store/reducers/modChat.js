@@ -26,8 +26,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 modChatEnabled: action.payload
             }
+        default:
+            return {
+                ...state
+            }
     }
-    return state
 }
 
 export default reducer

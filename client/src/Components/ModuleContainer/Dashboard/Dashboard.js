@@ -1,12 +1,13 @@
 //Files
 import React, {Component} from 'react';
 //Components
+import TopNav from '../TopNav/TopNav';
+import Auxiliary from '../../../hoc/Auxiliary';
 import TwitchChatModule from './TwitchChatModule/TwitchChatModule';
 import TwitchChatContent from './TwitchChatModule/TwitchChatContent/TwitchChatContent';
 import ModChatModule from './ModChatModule/ModChatModule';
 import ModChatContent from './ModChatModule/ModChatContent/ModChatContent';
-import TopNav from '../TopNav/TopNav';
-import Auxiliary from '../../../hoc/Auxiliary';
+// import StreamQueue from './StreamQueue/StreamQueue';
 //Styles
 import styles from './Dashboard.module.scss';
 //Assets
@@ -57,15 +58,16 @@ class Dashboard extends Component {
 
     render() {
 
-        let chatModules = []
+        let twitchChatModules = []
 
         for(let i=0; i < this.props.twitchChatCount; i++){
-          chatModules.push(
+          twitchChatModules.push(
             <TwitchChatModule className={styles.twitchModule} key={this.props.twitchChatCount-i} id="twitchModule" moduleNum={i} >
               <TwitchChatContent draggable="true" moduleNum={i}/>
             </TwitchChatModule>
           )
         }
+
 
         return ( 
           <Auxiliary>
@@ -80,7 +82,8 @@ class Dashboard extends Component {
                   <img onClick={()=>{
                       this.props.increaseModuleCount(this.props.twitchChatCount)
                       this.props.addTwitchModuleSettings()
-                    }} 
+                    }}
+                    alt="button"
                     src={twitchChatIcon}
                     className={styles.navButton} id={styles.addButton}>
                     </img>
@@ -94,8 +97,10 @@ class Dashboard extends Component {
                   <ModChatContent id="modCard" draggable="true"/>
               </ModChatModule>
 
-                {chatModules}
+              {twitchChatModules}
                 
+              {/* <StreamQueue apiEndpoint={this.props.apiEndpoint}/> */}
+
             </div>
           </Auxiliary>
         );

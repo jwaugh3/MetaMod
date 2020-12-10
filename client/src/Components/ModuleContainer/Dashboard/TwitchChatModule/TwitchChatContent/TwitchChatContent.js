@@ -60,7 +60,7 @@ class TwitchChatContent extends Component {
                 )
             }
             else {
-                return
+                return null
             }
         })
 

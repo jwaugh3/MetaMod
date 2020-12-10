@@ -1,0 +1,99 @@
+.rewardContainer {
+    width: 160px;
+    height: 175px;
+    margin: 10px;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+.rewardContainer:hover {
+    cursor: pointer;
+    user-select: none;
+    width: 150px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 6px;
+}
+
+.rewardBadge {
+    width: 100%;
+    height: 135px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.toggleContainer {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    float: right;
+    margin: 8px;
+    margin-right: 5px;
+    z-index: 10;
+}
+
+.rewardIcon {
+    width: 32px;
+    height: 32px;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    margin: auto;
+}
+
+.costContainer {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    height: 20px;
+    background-color: #525153;
+    margin: auto;
+    border-radius: 4px;
+    align-items: center;
+    padding: 0px 6px 0px 6px;
+}
+
+.costIcon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: auto 0px auto auto;
+}
+
+.costText {
+    vertical-align: top;
+    height: 20px;
+    font-size: 16px;
+    color: white;
+    display: inline-block;
+    margin: auto;
+    margin-top: -2px;
+}
+
+.rewardTextContainer {
+    height: 38px;
+    width: 90%;
+    margin: auto;
+}
+
+.rewardText {
+    margin-bottom: 0px;
+    height: 38px;
+    width:100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.rewardOffClick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: .5;
+    z-index: 11;
+}

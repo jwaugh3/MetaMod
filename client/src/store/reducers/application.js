@@ -10,7 +10,9 @@ const initialState = {
     channelHistory: [],
     roomUsers: [],
     accessToken: '',
-    currentChannel: ''
+    currentChannel: '',
+    activeTab: 'Dashboard',
+    channelPointsReceived: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -69,8 +71,21 @@ const reducer = (state = initialState, action) => {
               ...state,
               currentChannel: action.payload
             }
+        case actionTypes.SET_ACTIVE_TAB:
+            return {
+                ...state,
+                activeTab: action.payload
+            }
+        case actionTypes.SET_CHANNEL_POINTS_RECEIVED:
+            return {
+                ...state,
+                channelPointsReceived: action.payload
+            }
+        default:
+            return {
+                ...state
+            }
     }
-    return state
 }
 
 export default reducer
