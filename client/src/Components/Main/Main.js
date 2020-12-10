@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import apiCall from '../../api/apiCall';
+import { getUserDetails, getMods, getEmotes } from '../../api/apiCall';
 import queryString from 'querystring';
 import { getCustomRewardHandler } from '../ModuleContainer/ChannelPoints/customRewardHandler';
-// import { getRewardRedemptions } from '../../api/apiCall';
 //Components
 import ModuleContainer from '../ModuleContainer/ModuleContainer';
 import NavButton from './NavButton/NavButton';
@@ -46,7 +45,7 @@ class Main extends Component {
     let twitchID = parsed['?twitch_id']
     this.props.setTwitchID(twitchID)
 
-    await apiCall.getUserDetails(this.state.apiEndpoint, this.props.twitchID).then((userData)=>{
+    await getUserDetails(this.state.apiEndpoint, this.props.twitchID).then((userData)=>{
       //set global states
       this.props.setCurrentChannel(userData.login_username)
       this.props.setUsername(userData.username)
@@ -55,7 +54,7 @@ class Main extends Component {
       this.props.setChannelAccess(userData.channelAccess)
     })
 
-    await apiCall.getMods(this.state.apiEndpoint, this.props.currentChannel).then((data)=>{
+    await getMods(this.state.apiEndpoint, this.props.currentChannel).then((data)=>{
       this.props.setModList(data.mods)
     })
 
@@ -70,7 +69,7 @@ class Main extends Component {
       this.props.newModMsg(modMsg)
     })
 
-    await apiCall.getEmotes(this.state.apiEndpoint, this.props.currentChannel)
+    await getEmotes(this.state.apiEndpoint, this.props.currentChannel)
         .then((channelEmotes)=>{
           this.props.addChannelEmotes(channelEmotes[0])
           this.props.addChannelEmoteCodes(channelEmotes[1])
