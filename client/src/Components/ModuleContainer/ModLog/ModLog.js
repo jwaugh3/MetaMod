@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiCall from '../../../api/apiCall';
+import { getModRecords } from '../../../api/apiCall';
 //Components
 import Auxiliary from '../../../hoc/Auxiliary';
 import TopNav from '../TopNav/TopNav'
@@ -21,7 +21,7 @@ class ModLog extends Component {
 
     componentDidMount = () => {
         this.setState({loading: true}, async () => {
-            await apiCall.getModRecords(this.props.apiEndpoint, this.props.currentChannel)
+            await getModRecords(this.props.apiEndpoint, this.props.currentChannel)
             .then((response)=>{
                 if(response === null){
                     this.props.setModLogs(null)
@@ -43,7 +43,7 @@ class ModLog extends Component {
         if(this.props.currentChannel !== prevProps.currentChannel) {
 
             this.setState({loading: true}, async () => {
-                await apiCall.getModRecords(this.props.apiEndpoint, this.props.currentChannel)
+                await getModRecords(this.props.apiEndpoint, this.props.currentChannel)
                 .then((response)=>{
                     if(response === null){
                         this.props.setModLogs(null)

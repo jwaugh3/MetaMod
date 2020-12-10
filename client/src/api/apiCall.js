@@ -263,6 +263,6 @@ module.exports = {
     createCustomReward,
     deleteCustomReward,
     getCustomReward,
-    updateCustomReward,
+    updateCustomReward
     // getRewardRedemptions
 }
