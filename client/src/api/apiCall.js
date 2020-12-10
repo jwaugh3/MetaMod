@@ -1,4 +1,4 @@
-const getUserDetails = async (apiURL, twitchID) => {
+export const getUserDetails = async (apiURL, twitchID) => {
 
     let userDetails = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/userData/' + twitchID)
@@ -16,7 +16,7 @@ const getUserDetails = async (apiURL, twitchID) => {
     return userDetails
 }
 
-const getMods = async (apiURL, channel) => {
+export const getMods = async (apiURL, channel) => {
     let mods = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/getMods/' + channel)
         .then((data)=>{
@@ -33,7 +33,7 @@ const getMods = async (apiURL, channel) => {
     return mods
 }
 
-const getEmotes = async (apiURL, channel) => {
+export const getEmotes = async (apiURL, channel) => {
     let bttvChannelEmotes = await new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/getBttvEmotes/' + channel)
         .then((data)=>{
@@ -90,7 +90,7 @@ const getEmotes = async (apiURL, channel) => {
     return [cleanEmotes, cleanEmoteCodes, emoteIDByName]
 }
 
-const getModRecords = async (apiURL, channel) => {
+export const getModRecords = async (apiURL, channel) => {
 
     let modRecords = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/getModRecords/' + channel)
@@ -108,7 +108,7 @@ const getModRecords = async (apiURL, channel) => {
     return modRecords
 }
 
-const createCustomReward = async (apiURL, channel, customReward) => {
+export const createCustomReward = async (apiURL, channel, customReward) => {
     let rewardData = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/createCustomRewards/', {
             method: 'POST',
@@ -134,7 +134,7 @@ const createCustomReward = async (apiURL, channel, customReward) => {
     return rewardData
 }
 
-const deleteCustomReward = async (apiURL, channel, id) => {
+export const deleteCustomReward = async (apiURL, channel, id) => {
 
     let rewardData = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/deleteCustomReward/', {
@@ -164,7 +164,7 @@ const deleteCustomReward = async (apiURL, channel, id) => {
     return rewardData
 }
 
-const getCustomReward = async (apiURL, channel) => {
+export const getCustomReward = async (apiURL, channel) => {
 
     let rewards =[]
     let manageable = [true, false]
@@ -205,7 +205,7 @@ const getCustomReward = async (apiURL, channel) => {
     return rewards
 }
 
-const updateCustomReward = async (apiURL, channel, rewardID, updatedData) => {
+export const updateCustomReward = async (apiURL, channel, rewardID, updatedData) => {
 
     let rewardData = new Promise((resolve, reject)=>{
         fetch(apiURL + '/api/updateCustomReward', {
@@ -235,7 +235,7 @@ const updateCustomReward = async (apiURL, channel, rewardID, updatedData) => {
     return rewardData
 }
 
-// const getRewardRedemptions = async (apiURL, channel, rewardID) => {
+//export const getRewardRedemptions = async (apiURL, channel, rewardID) => {
 
 //     let rewardData = new Promise((resolve, reject)=>{
 //         fetch(apiURL + '/api/getRewardRedemptions/' + channel + '/' + rewardID)
@@ -254,15 +254,3 @@ const updateCustomReward = async (apiURL, channel, rewardID, updatedData) => {
 
 //     return rewardData
 // }
-
-module.exports = {
-    getUserDetails,
-    getMods,
-    getEmotes,
-    getModRecords,
-    createCustomReward,
-    deleteCustomReward,
-    getCustomReward,
-    updateCustomReward
-    // getRewardRedemptions
-}
