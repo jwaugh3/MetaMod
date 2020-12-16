@@ -9,6 +9,7 @@ import Contact from './Components/Site/Contact/Contact';
 import Login from './Components/Site/Login/Login';
 import Policy from './Components/Site/Policy/Policy';
 import Main from './Components/Main/Main';
+import ClipRewind from './Components/ModuleContainer/ClipRewind/ClipRewind';
 //Styles
 import styles from './App.module.scss';
 
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path='/contact' exact component={Contact} url={url}/>
           <Route path='/login' exact component={Login} url={url} apiEndpoint={apiEndpoint}/>
           <Route path='/dashboard' exact component={Main}/>
+          <Route path='/ClipRewind' exact component={ClipRewind}/>
         </Router>
       </div>
     );

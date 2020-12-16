@@ -53,10 +53,34 @@ const moderationRecordSchema = new Schema({
 
 const ModerationRecord = mongoose.model('moderation_records', moderationRecordSchema)
 
+const clipRewind2020Schema = new Schema({
+    channel: String,
+    twitch_ID: String,
+    clips: [Object]
+})
+
+const ClipRewind2020 = mongoose.model('clip_rewind_2020', clipRewind2020Schema)
+
+const clipUserSchema = new Schema({
+    twitch_ID: String, 
+    login_username: String,
+    display_name: String,
+    broadcaster: String,
+    profile_image: String,
+    email: String,
+    user_token: String,
+    refresh_token: String,
+    last_sign_in: Date
+})
+
+const ClipRewindUser = mongoose.model('clip_rewind_users', clipUserSchema)
+
 module.exports = {
     User,
     ChannelAccess,
     BttvEmote,
     FfzEmote,
-    ModerationRecord
+    ModerationRecord,
+    ClipRewind2020,
+    ClipRewindUser
 }

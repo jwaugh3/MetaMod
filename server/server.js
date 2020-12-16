@@ -8,11 +8,15 @@ const socket = require('./socket');
 const bot = require('./bot/bot');
 const updateBot = require('./bot/updateBot');
 const { updateBttvGlobalEmotes } = require('./utils/emotes/bttv');
-const path = require('path')
+const path = require('path');
+const clipAuthRoute = require('./routes/clipAuthRoute');
 require('dotenv').config()
-
+ 
 //server setup
 const app = express();
+
+var session = require('express-session');
+app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false}));
 
 //cors setup 
 app.use(cors({ origin: '*' }));
@@ -42,6 +46,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 //authorization route
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes)
+app.use('/clipAuth', clipAuthRoute)
 
 //add user
 updateBot.getChannels()

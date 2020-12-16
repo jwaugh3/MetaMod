@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, ChannelAccess, BttvEmote, FfzEmote, ModerationRecord } = require('../models/dbModels');
+const { User, ChannelAccess, BttvEmote, FfzEmote, ModerationRecord, ClipRewind2020, ClipRewindUser } = require('../models/dbModels');
 const { client } = require('../bot/bot');
 const { generateNewAccessToken } = require('./authRoutes');
 const request = require('request');
@@ -255,5 +255,93 @@ router.post('/updateCustomReward', jsonParser, (req, res)=>{
 //     }
 //     })
 // })
+
+
+router.get('/getClipRewind/:username/:channel', (req, res)=>{
+    let channel = req.params.channel.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+    console.log(channel)
+   
+    ClipRewind2020.findOne({ channel: channel }).then((existingClips)=>{
+        if(existingClips){
+            res.send(existingClips)
+        } else {
+            ClipRewindUser.findOne({ login_username: req.params.username }).then(async (existingUser)=>{
+                if(existingUser){
+                    let twitchResponse = await generateNewAccessToken(existingUser.refresh_token)
+                    let accessToken = JSON.parse(twitchResponse)['access_token']
+
+                    var request = require('request');
+
+                    var headers = {
+                        'Authorization': 'Bearer ' + accessToken,
+                        'Client-Id': process.env.TWITCH_CLIENT_ID
+                    };
+
+                    var options = {
+                        url: 'https://api.twitch.tv/helix/users?login=' + channel,
+                        headers: headers
+                    };
+
+                    request(options, async (error, response)=>{
+                        let channelSearchData = JSON.parse(response.body)
+
+                        if(channelSearchData.data.length === 0){
+                            res.send({error: 'no channel found'})
+                            return
+                        }
+
+                        var headers = {
+                            'Authorization': 'Bearer ' + accessToken,
+                            'Client-Id': process.env.TWITCH_CLIENT_ID
+                        };
+                        let startDate = new Date('2020', '0', '1')
+                        const startFormatted = startDate.toISOString();
+     
+                        let endDate = new Date('2020', '11', '30')
+                        const endFormatted = endDate.toISOString();
+                        
+                        var options = {
+                            url: `https://api.twitch.tv/helix/clips?broadcaster_id=${channelSearchData.data[0].id}&started_at=${startFormatted}&ended_at=${endFormatted}&first=5`,
+                            headers: headers
+                        };
+    
+                        var topClips = []
+                        
+                        await new Promise((resolve, reject)=>{
+                            request(options, (error, response)=>{
+                                let clips = JSON.parse(response.body)
+                                if(clips.data.length === 0){
+                                    res.send({error:'no clips from twitch'})
+                                } else {
+                                    clips.data.forEach((clip)=>{
+                                        if(clip.created_at.includes('2020')){
+                                            topClips.push(clip) 
+                                        }
+                                    })
+                                    resolve()
+                                }
+                            })
+                        })
+
+                        new ClipRewind2020({
+                            channel: channelSearchData.data[0].login,
+                            twitch_ID: channelSearchData.data[0].id,
+                            clips: topClips
+                        })
+                        .save()
+                        .then((response)=>{
+                            
+                            res.send(response)
+                        })
+                    })
+        
+                } else {
+                    console.log('/getClipRewind Api endpoint errored out when getting user from db')
+                    res.send({error:'no clips from twitch'})
+                }
+            })  
+        }
+    })
+})
 
 module.exports = router;  

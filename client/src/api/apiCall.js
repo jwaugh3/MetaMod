@@ -254,3 +254,24 @@ export const updateCustomReward = async (apiURL, channel, rewardID, updatedData)
 
 //     return rewardData
 // }
+
+export const getClipRewind = async (apiURL, username, channel) => {
+    let clipRewind = new Promise((resolve, reject)=>{
+        fetch(apiURL + '/api/getClipRewind/' + username + '/' + channel)
+            .then((data)=>{
+                data.json()
+                .then((res)=>{
+                    if(res.error){
+                        resolve('error')
+                    } else {
+                        resolve(res)
+                    }
+                })
+            })
+            .catch((error)=>{
+                reject(error)
+            })
+    })
+
+    return clipRewind
+}

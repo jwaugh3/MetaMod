@@ -1,0 +1,135 @@
+.clipContainer {
+    display: grid;
+    grid-template-columns: 100px 840px 100px;
+    margin: auto;
+    z-index: 21;
+    position: relative;
+}
+
+.iframeContainer {
+    height: 500px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.501);
+}
+
+.clipCount {
+    position: absolute;
+    right: 110px;
+    top: -110px;
+    font-size: 100px;
+    color: #9059F6;
+    font-family: 'Swis721-reg';
+    z-index: 28;
+    text-shadow: 5px 5px 6px black;
+    font-weight: bold;
+}
+
+.topClip {
+    font-size: 90px;
+    position: absolute;
+    right: 45px;
+    top: -130px;
+    color: #9059F6;
+    font-family: 'Swis721-reg';
+    z-index: 28;
+    text-shadow: 5px 5px 6px black;
+    font-weight: bold;
+    margin: auto;
+    display: inline;
+}
+
+.snowDrifts {
+    position: absolute;
+    right: 98px;
+    top: -20px;
+    z-index: 22;
+}
+
+.rightSmallSnow {
+    position: absolute;
+    right: 20px;
+    top: 190px;
+    z-index: 22;
+    width: 60px;
+}
+
+.leftSmallSnow {
+    position: absolute;
+    left: 20px;
+    top: 190px;
+    z-index: 22;
+    width: 60px;
+}
+
+.nextButton {
+    z-index: 5;
+    width: 80px;
+    height: 120px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.nextButtonImg {
+    width: fit-content;
+    width: 80px;
+    height: 120px;
+}
+
+.backButton {
+    z-index: 5;
+    width: 80px;
+    height: 120px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.backButtonImg {
+    width: fit-content;
+    width: 80px;
+    height: 120px;
+}
+
+.welcome {
+    position: absolute;
+    color: #9059F6;
+    font-family: 'Swis721-reg';
+    font-weight: bold;
+    font-size: 45px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-47.5%);
+    animation: fade-out ease 6s;
+    z-index: 31;
+    visibility: none;
+    width: 900px;
+    display: inline;
+  }
+  
+//   @keyframes fade-out {
+//       0% {
+//         visibility: visible;
+//         opacity: 1;
+//       }
+//       20%{
+//         visibility: visible;
+//         opacity: 1;
+//       }
+//       40%{
+//         visibility: visible;
+//         opacity: 1;
+//       }
+//       60%{
+//         visibility: visible;
+//         opacity: 1;
+//       }
+//       80% {
+//         visibility: visible;
+//         opacity: 0;
+//       }
+//       100% {
+//         opacity: 0;
+//       }
+//     }
+  
+  .welcomeSign{
+    width: 100%;
+  }

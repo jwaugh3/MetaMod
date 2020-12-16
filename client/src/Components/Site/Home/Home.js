@@ -17,13 +17,16 @@ class Home extends Component {
                 <div className={styles.homeBannerContainer}>
                     <div className={styles.callToAction}>
                         <h2>
-                            Unify Your Moderation Team In One Place
+                            Celebrate Your Amazing Year Of Streaming
                         </h2>
+                        <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
+                        <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
+                        <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
                         <p>
-                            Currently in Beta
+                            Checkout Your Twitch Clip Rewind!
                         </p>
-                        <button onClick={()=> {window.location = '/login'}}>
-                            Try the Demo
+                        <button onClick={()=> {window.location = 'https://api.metamoderation.com/clipAuth/clipRewindLogin'}}>
+                            See My Rewind
                         </button>
                     </div>
                     <div className={styles.bannerArtContainer}>
