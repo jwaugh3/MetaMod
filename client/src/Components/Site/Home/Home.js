@@ -7,6 +7,7 @@ import Navigation from '../Navigation/Navigation';
 import styles from './Home.module.css';
 //Assets
 import bannerArt from '../../../resources/bannerArt.png';
+import rewind from '../../../resources/rewind.png';
 
 class Home extends Component {
 
@@ -16,6 +17,10 @@ class Home extends Component {
                 <Navigation url={this.props.url} displayLogin={true}/>
                 <div className={styles.homeBannerContainer}>
                     <div className={styles.callToAction}>
+                        <div className={styles.rewindTitle}>
+                            <img src={rewind} alt="rewind"/>
+                            <h2>Twitch Clip Rewind</h2>
+                        </div>
                         <h2>
                             Celebrate Your Amazing Year Of Streaming
                         </h2>
@@ -26,7 +31,7 @@ class Home extends Component {
                             Checkout Your Twitch Clip Rewind!
                         </p>
                         <button onClick={()=> {window.location = 'https://api.metamoderation.com/clipAuth/clipRewindLogin'}}>
-                            See My Rewind
+                            Show Rewind
                         </button>
                     </div>
                     <div className={styles.bannerArtContainer}>

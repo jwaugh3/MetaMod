@@ -66,3 +66,13 @@
     width: 60px;
     margin: auto;
 }
+
+.rewindTitle {
+    display: flex;
+    width: 500px;
+}
+
+.rewindTitle h2 {
+    margin-left: 0px;
+    color: #9059F6;
+}

@@ -39,20 +39,6 @@ export class Clip extends Component {
                     
                     <img className={styles.nextButtonImg} src={nextButton} atl="next button"/>
                 </div>
-                
-                {/* <div className={styles.welcome} id="welcomeID">
-                <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                <img className={styles.dance} src='https://cdn.betterttv.net/emote/5f1b0186cf6d2144653d2970/3x' alt="dance"/>
-                <img className={styles.dance} src='https://cdn.betterttv.net/emote/55898e122612142e6aaa935b/3x' alt="dance"/>
-                <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                    <img src={welcomeSign} className={styles.welcomeSign} alt="welcome"/>
-                    <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                    <img className={styles.dance} src='https://cdn.betterttv.net/emote/5f1b0186cf6d2144653d2970/3x' alt="dance"/>
-                    <img className={styles.dance} src='https://cdn.betterttv.net/emote/55898e122612142e6aaa935b/3x' alt="dance"/>
-                    <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                    <img className={styles.dance} src='https://cdn.betterttv.net/emote/5b1740221c5a6065a7bad4b5/3x' alt="dance"/>
-                </div> */}
             </div>
         )
     }
