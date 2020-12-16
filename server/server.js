@@ -15,9 +15,6 @@ require('dotenv').config()
 //server setup
 const app = express();
 
-var session = require('express-session');
-app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false}));
-
 //cors setup 
 app.use(cors({ origin: '*' }));
 app.use(function(req, res, next) {
